@@ -235,6 +235,8 @@
 	      <div id="sidedrawer-brand" class="mui--appbar-line-height">Brand.io</div>
 	      <div class="mui-divider"></div>
 	      <ul>
+	      	<li><strong><a href="#/campeonato">Novo Campeonato</a></strong></li>
+	      	<li><strong>Nova Competição</strong></li>
 	        <li>
 	          <strong>Category 1</strong>
 	          <ul>
@@ -284,5 +286,7 @@
   </body>
   
   <script src="${pageContext.request.contextPath}/resources/static/core/app.js"></script>  
+  <script src="${pageContext.request.contextPath}/resources/static/core/controllers/campeonato-form-1.0.0.js"></script>  
+  <script src="${pageContext.request.contextPath}/resources/static/core/services/campeonato-service-1.0.0.js"></script>  
   
 </html>

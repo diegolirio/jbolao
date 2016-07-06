@@ -8,6 +8,7 @@ app.config(['$routeProvider', '$httpProvider',
 	  
 	$routeProvider
 		.when('/', { templateUrl: SERVER_APP + '/campeonato/dashboard'})
+		.when('/campeonato', { templateUrl: SERVER_APP + '/campeonato/form'})
 		;
 
 }]);  
