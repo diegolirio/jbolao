@@ -8,7 +8,9 @@ app.config(['$routeProvider', '$httpProvider',
 	  
 	$routeProvider
 		.when('/', { templateUrl: SERVER_APP + '/campeonato/dashboard'})
-		.when('/campeonato', { templateUrl: SERVER_APP + '/campeonato/form'})
+		
+		.when('/campeonato/:id', { templateUrl: SERVER_APP + '/campeonato/form'})
+		.when('/campeonatos',    { templateUrl: SERVER_APP + '/campeonato/list'})
 		;
 
 }]);  

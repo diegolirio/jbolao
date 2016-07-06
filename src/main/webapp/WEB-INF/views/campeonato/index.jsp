@@ -235,8 +235,7 @@
 	      <div id="sidedrawer-brand" class="mui--appbar-line-height">Brand.io</div>
 	      <div class="mui-divider"></div>
 	      <ul>
-	      	<li><strong><a href="#/campeonatos">Campeonatos</a></strong></li>
-	        <!-- 
+	      	<li><strong><a href="#/competicoes">Competições</a></strong></li>
 	        <li>
 	          <strong>Category 1</strong>
 	          <ul>
@@ -261,7 +260,6 @@
 	            <li><a href="#">Item 3</a></li>
 	          </ul>
 	        </li>
-	        -->
 	      </ul>
 	    </div>
 			<header id="header">
@@ -287,8 +285,7 @@
   </body>
   
   <script src="${pageContext.request.contextPath}/resources/static/core/app.js"></script>  
-  <script src="${pageContext.request.contextPath}/resources/static/core/controllers/campeonato-form-controller-1.0.0.js"></script>  
-  <script src="${pageContext.request.contextPath}/resources/static/core/controllers/campeonato-list-controller-1.0.0.js"></script>  
+  <script src="${pageContext.request.contextPath}/resources/static/core/controllers/campeonato-form-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/services/campeonato-service-1.0.0.js"></script>  
   
 </html>

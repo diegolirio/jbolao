@@ -7,5 +7,5 @@ import br.com.jbolao.jbolao.models.Campeonato;
 
 @Repository
 public interface CampeonatoRepository extends CrudRepository<Campeonato, Long> {
- 
+
 }
