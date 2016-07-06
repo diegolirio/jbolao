@@ -14,6 +14,7 @@
 		      <th>Descrição</th>
 		      <th>Status</th>
 		      <th></th>
+		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -21,6 +22,7 @@
 		      <td>{{ c.nome }}</td>
 		      <td>{{ c.descricao }}</td>
 		      <td>{{ c.status }}</td>
+			  <td><a href="#/jogos/por/campeonato/{{c.id}}" class="mui-btn mui-btn--raised">Jogos</a></td>
 		      <td>
 		      	<a href="#/campeonato/{{c.id}}" class="mui-btn mui-btn--small mui-btn--danger mui-btn--fab">
 					<img src="https://justineisartsy.files.wordpress.com/2015/10/edit.png"/>
