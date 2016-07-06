@@ -19,6 +19,19 @@ public class CampeonatoController {
 	@Autowired
 	private CampeonatoService campeonatoService;
 
+	/*
+	 * Pages
+	 */
+	
+	@RequestMapping(value="/dashboard")
+	public String dashboard() {
+		return "campeonato/dashboard";
+	}
+	
+	/*
+	 * Rest
+	 */
+	
 	@RequestMapping(value="/findall", produces="application/json")
 	public ResponseEntity<String> findAll() {
 		try {
