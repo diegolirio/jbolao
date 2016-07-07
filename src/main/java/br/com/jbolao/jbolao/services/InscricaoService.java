@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.jbolao.jbolao.models.Aposta;
 import br.com.jbolao.jbolao.models.Campeonato;
 import br.com.jbolao.jbolao.models.Inscricao;
+import br.com.jbolao.jbolao.models.Jogo;
 import br.com.jbolao.jbolao.repositories.InscricaoRepository;
 
 @Service
@@ -14,6 +16,12 @@ public class InscricaoService {
 
 	@Autowired
 	private InscricaoRepository inscricaoRepository;
+
+	@Autowired
+	private JogoService jogoService;
+
+	@Autowired
+	private ApostaService apostaService;
 
 	public List<Inscricao> findByCampeonato(Campeonato campeonato) {
 		return this.inscricaoRepository.findByCampeonato(campeonato);
@@ -24,7 +32,25 @@ public class InscricaoService {
 	}
 
 	public Inscricao save(Inscricao inscricao) {
-		return this.inscricaoRepository.save(inscricao);
+		boolean novaInscricao = inscricaoRepository.exists(inscricao.getId()) == false;
+		inscricao = this.inscricaoRepository.save(inscricao);
+		if(novaInscricao) {
+			List<Jogo> jogos = this.jogoService.findByCampeonatoInscricoes(inscricao);
+			for (Jogo jogo : jogos) {
+				Aposta a = new Aposta();
+				a.setInscricao(inscricao);
+				a.setJogo(jogo);
+				a.setCalculado(false);
+				a.setResultadoA(0);
+				a.setResultadoB(0);
+				this.apostaService.save(a);
+			}
+		}
+		return inscricao;
+	}
+
+	public List<Inscricao> findByCampeonatoJogos(Jogo jogo) {
+		return this.inscricaoRepository.findByCampeonatoJogos(jogo);
 	}
 
 }

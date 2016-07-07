@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import br.com.jbolao.jbolao.models.Campeonato;
+import br.com.jbolao.jbolao.models.Inscricao;
 import br.com.jbolao.jbolao.models.Jogo;
 import br.com.jbolao.jbolao.models.StatusType;
 
@@ -16,6 +17,8 @@ public interface JogoRepository extends CrudRepository<Jogo, Long> {
 
 	int countByCampeonato(Campeonato campeonato);
 
-	int countByCampeonatoAndStatusNot(Campeonato campeonato, StatusType status); 
+	int countByCampeonatoAndStatusNot(Campeonato campeonato, StatusType status);
+
+	List<Jogo> findByCampeonatoInscricoes(Inscricao inscricao);  
 
 }

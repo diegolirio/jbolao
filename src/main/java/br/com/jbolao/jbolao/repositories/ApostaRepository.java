@@ -5,15 +5,15 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.jbolao.jbolao.models.Campeonato;
+import br.com.jbolao.jbolao.models.Aposta;
 import br.com.jbolao.jbolao.models.Inscricao;
 import br.com.jbolao.jbolao.models.Jogo;
 
 @Repository
-public interface InscricaoRepository extends CrudRepository<Inscricao, Long> {
+public interface ApostaRepository extends CrudRepository<Aposta, Long> {
 
-	List<Inscricao> findByCampeonato(Campeonato campeonato);
- 
-	List<Inscricao> findByCampeonatoJogos(Jogo jogo); 
+	List<Aposta> findByInscricao(Inscricao inscricao);
+
+	List<Aposta> findByInscricaoCampeonatoInscricoesCampeonatoJogos(Jogo jogo);
 
 }

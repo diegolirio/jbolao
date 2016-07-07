@@ -1,6 +1,7 @@
 package br.com.jbolao.jbolao.models;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author Diego Lirio
@@ -34,6 +38,14 @@ public class Campeonato implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(columnDefinition="VARCHAR(20) NOT NULL default 'EDICAO'")
 	private StatusType status = StatusType.EDICAO;
+	
+	@org.codehaus.jackson.annotate.JsonIgnore
+	@OneToMany(mappedBy="campeonato")
+	private List<Inscricao> inscricoes;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="campeonato")
+	private List<Jogo> jogos;
 	
 	public Long getId() {
 		return id;
@@ -65,6 +77,22 @@ public class Campeonato implements Serializable {
 
 	public void setStatus(StatusType status) {
 		this.status = status;
+	}
+
+	public List<Inscricao> getInscricoes() {
+		return inscricoes;
+	}
+
+	public void setInscricoes(List<Inscricao> inscricoes) {
+		this.inscricoes = inscricoes;
+	}
+
+	public List<Jogo> getJogos() {
+		return jogos;
+	}
+
+	public void setJogos(List<Jogo> jogos) {
+		this.jogos = jogos;
 	}
 
 	@Override
