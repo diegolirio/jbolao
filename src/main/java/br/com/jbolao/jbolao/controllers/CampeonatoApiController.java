@@ -65,6 +65,29 @@ public class CampeonatoApiController {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		} 
 	}
+	
+	@RequestMapping(value="/start", method=RequestMethod.PUT, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
+	public ResponseEntity<String> start(@RequestBody Campeonato campeonato) {
+		try {
+			System.out.println(campeonato);
+			campeonato = this.campeonatoService.startStatus(campeonato);
+			return new ResponseEntity<String>(new ObjectMapper().writeValueAsString(campeonato), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		} 
+	}
+
+	@RequestMapping(value="/backtomodeedit", method=RequestMethod.PUT, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
+	public ResponseEntity<String> backToInProccess(@RequestBody Campeonato campeonato) {
+		try {
+			campeonato = this.campeonatoService.backToModeEditStatus(campeonato);
+			return new ResponseEntity<String>(new ObjectMapper().writeValueAsString(campeonato), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		} 
+	}
 
 	
 }

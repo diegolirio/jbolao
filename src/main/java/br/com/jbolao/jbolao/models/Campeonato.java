@@ -66,6 +66,10 @@ public class Campeonato implements Serializable {
 	public void setStatus(StatusType status) {
 		this.status = status;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Campeonato [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", status=" + status + "]";
+	}
 	
 }

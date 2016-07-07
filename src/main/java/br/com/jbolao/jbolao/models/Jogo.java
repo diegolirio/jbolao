@@ -34,7 +34,7 @@ public class Jogo implements Serializable {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(columnDefinition="VARCHAR(20) default 'EDICAO'", nullable=false)	
-	private StatusType status;
+	private StatusType status = StatusType.EDICAO;
 
 	@ManyToOne
 	private Campeonato campeonato;

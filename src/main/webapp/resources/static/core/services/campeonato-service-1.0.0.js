@@ -11,11 +11,19 @@ app.factory('CampeonatoService', ['$http', function($http) {
 	var _save = function(campeonato) {
 		return $http.post('/jbolao/api/campeonato/save', campeonato);
 	}	
-
+	
+	var _start = function(campeonato) {
+		return $http.put('/jbolao/api/campeonato/start', campeonato);
+	}
+	
+	var _backToModeEdit = function(campeonato) {
+		return $http.put('/jbolao/api/campeonato/backtomodeedit', campeonato);
+	}
+	
 	var _delete = function(campeonato) {
 		return $http.delete('/jbolao/api/campeonato/delete', campeonato);
 	}
-	
+
 	return {
 		
 		findAll : _findAll,
@@ -24,7 +32,12 @@ app.factory('CampeonatoService', ['$http', function($http) {
 		
 		save : _save,
 		
+		iniciar : _start,
+
+		voltarPendente : _backToModeEdit,
+
 		delete : _delete
+		
 		
 	}
 	

@@ -11,5 +11,10 @@ public class JogoController {
 	public String pageList() {
 		return "jogo/list";
 	}
+
+	@RequestMapping(value="/form")
+	public String pageForm() {
+		return "jogo/form";
+	}
 	
 }

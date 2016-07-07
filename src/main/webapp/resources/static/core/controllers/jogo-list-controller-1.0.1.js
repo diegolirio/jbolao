@@ -20,6 +20,25 @@ app.controller('JogoListController', ['$routeParams', 'JogoService', 'Campeonato
 			alert(JSON.stringify(error));
 		});
 	}
+
+	self.iniciar = function(campeonato) {
+		CampeonatoService.iniciar(campeonato).then(function(resp) {
+			self.campeonato = resp.data;
+		}, function(error) {
+			alert(JSON.stringify(error));
+		});
+	}
+
+	/**
+	 * Voltar para pendente
+	 */
+	self.voltarPendente = function(campeonato) {
+		CampeonatoService.voltarPendente(campeonato).then(function(resp) {
+			self.campeonato = resp.data;
+		}, function(error) {
+			alert(JSON.stringify(error));
+		});
+	}
 	
 	self.init();
 	
