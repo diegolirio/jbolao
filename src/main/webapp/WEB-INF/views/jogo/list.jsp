@@ -1,6 +1,7 @@
 <!-- Main content goes here -->
 <div class="mui--appbar-height"></div>
 <div class="mui-container" ng-controller="JogoListController as jCtrl">
+	
 	  <h1>
 	  	{{jCtrl.campeonato.nome}} 
 	  	<small class="mui--text-subhead">( {{jCtrl.campeonato.descricao}} )</small>
@@ -11,12 +12,19 @@
 	  			ng-click="jCtrl.voltarPendente(jCtrl.campeonato)"
 	  			ng-show="jCtrl.campeonato.status == 'EM_ANDAMENTO'">Voltar para Pendente</button>
 	  </h1>
+	  <hr/>	
 	  
-	  <h3 class="mui--text-right">
-	  	Jogos
-	  	<a href="#/jogo/0/campeonato/{{jCtrl.campeonato.id}}" class="mui-btn mui-btn--small mui-btn--primary mui-btn--fab">+</a>
-	  </h3>
-		
+	  <div class="mui-col-md-8">
+		  <h3>
+		  	Jogos
+		  	<a href="#/jogo/0/campeonato/{{jCtrl.campeonato.id}}" class="mui-btn mui-btn--small mui-btn--primary mui-btn--fab">+</a>
+		  </h3>
+	  </div>
+	  <div class="mui-col-md-4 mui--text-right">
+  	  	  <a href="#/inscricoes/por/campeonato/{{jCtrl.campeonato.id}}" class="mui-btn mui-btn--small">Participantes</a>
+	  </div>		
+	  <br/>	
+	  
 	  <a href="#/jogo/{{j.id}}/campeonato/{{jCtrl.campeonato.id}}" ng-repeat="j in jCtrl.jogos">	
 		  <div class="mui-panel mui-col-md-6 mui--text-center">
 			<span class="mui-col-md-4 mui--text-headline ">{{j.timeA}}</span> 

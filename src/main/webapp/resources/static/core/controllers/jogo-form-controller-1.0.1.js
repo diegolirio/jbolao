@@ -7,7 +7,6 @@ app.controller('JogoFormController', ['$routeParams', 'JogoService',
 		if($routeParams.id > 0) {
 			JogoService.findOne($routeParams.id).then(function(resp) {
 				self.jogo = resp.data;
-				self.campeonato = self.jogo.campeonato;
 			}, function(error) {
 				alert(JSON.stringify(error));
 			});

@@ -9,6 +9,21 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js"></script>
     <link href="${pageContext.request.contextPath}/resources/static/mui-0.6.5/css/mui.min.css" rel="stylesheet" type="text/css" />
     <script src="${pageContext.request.contextPath}/resources/static/mui-0.6.5/js/mui.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/static/mui-0.6.5/angular/mui-angular.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/static/mui-0.6.5/angular/mui-angular.min.js"></script>
+
+	<!-- angucomplete-alt -->
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="${pageContext.request.contextPath}/resources/static/autocomplete-alt/angucomplete-alt.css" rel="stylesheet" />
+	<script src="${pageContext.request.contextPath}/resources/static/autocomplete-alt/angucomplete-alt.js"></script>
+	<style type="text/css">
+		.angucomplete-dropdown {
+			overflow-y: auto;
+			max-height: 200px; 
+		}
+	</style>
+	<!-- /angucomplete-alt -->
+	
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
     <style>
      	/* Tutorial CSS goes here */
@@ -292,8 +307,13 @@
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/campeonato-form-controller-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/jogo-list-controller-1.0.1.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/jogo-form-controller-1.0.1.js"></script>  
+  <script src="${pageContext.request.contextPath}/resources/static/core/controllers/inscricao-list-controller-1.0.0.js"></script>  
+  <script src="${pageContext.request.contextPath}/resources/static/core/controllers/inscricao-form-controller-1.0.0.js"></script>  
+  <script src="${pageContext.request.contextPath}/resources/static/core/controllers/participante-form-controller-1.0.1.js"></script>  
 	<!-- Services -->
   <script src="${pageContext.request.contextPath}/resources/static/core/services/campeonato-service-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/services/jogo-service-1.0.0.js"></script>  
+  <script src="${pageContext.request.contextPath}/resources/static/core/services/inscricao-service-1.0.1.js"></script>  
+  <script src="${pageContext.request.contextPath}/resources/static/core/services/participante-service-1.0.0.js"></script>  
   
 </html>
