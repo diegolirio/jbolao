@@ -29,7 +29,7 @@ public class JogoService {
 	}
 
 	public Jogo save(Jogo jogo) {
-		boolean novaJogo = this.jogoRepository.exists(jogo.getId()) == false;
+		boolean novaJogo = jogo.getId() == null || this.jogoRepository.exists(jogo.getId()) == false;
 		jogo = this.jogoRepository.save(jogo);
 		if(novaJogo) {
 			List<Inscricao> inscricoes = this.inscricaoService.findByCampeonatoJogos(jogo);

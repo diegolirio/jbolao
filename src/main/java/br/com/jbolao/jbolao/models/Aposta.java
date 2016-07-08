@@ -20,15 +20,15 @@ public class Aposta {
 	@ManyToOne
 	private Jogo jogo;
 	
-	private int resultadoA;
+	private int resultadoA = 0;
 
-	private int resultadoB;
+	private int resultadoB = 0;
 	
 	private int pontos;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(columnDefinition="CHAR(1)", nullable=true)
-	private VencedorType vencedor;
+	@Column(columnDefinition="CHAR(1) DEFAULT 'E'", nullable=true)
+	private VencedorType vencedor = VencedorType.E;
 	
 	private boolean calculado = false;
 

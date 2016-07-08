@@ -1,40 +1,32 @@
 <!-- Main content goes here -->
 <div class="mui--appbar-height"></div>
-<div class="mui-container-fluid" >
+<div class="mui-container" ng-controller="CampeonatoDashboardCrontroller as dashCtrl">
 	  <br>
-	  <h1>Brand.io</h1>
-	  <p>
-	    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
-	    sollicitudin volutpat molestie. Nullam id tempor nulla. Aenean sit amet
-	    urna et elit pharetra consequat. Aliquam fringilla tortor vitae lectus
-	    tempor, tempor bibendum nunc elementum. Etiam ultrices tristique diam,
-	    vitae sodales metus bibendum id. Suspendisse blandit ligula eu fringilla
-	    pretium. Mauris dictum gravida tortor eu lacinia. Donec purus purus,
-	    ornare sit amet consectetur sed, dictum sitamet ex. Vivamus sit amet
-	    imperdiet tellus. Quisque ultrices risus a massa laoreet, vitae tempus sem
-	    congue. Maecenas nec eros ut lectus vehicula rutrum. Donec consequat
-	    tincidunt arcu non faucibus. Duis elementum, ante venenatis lacinia
-	    cursus, turpis massa congue magna, sed dapibus felis nibh sed tellus. Nam
-	    consectetur non nibh vitae sodales. Pellentesque malesuada dolor nec mi
-	    volutpat, eget vehicula eros ultrices.
-	  </p>
-	  <p>
-	    Aenean vehicula tortor a tellus porttitor, id elementum est tincidunt.
-	    Etiam varius odio tortor. Praesent vel pulvinar sapien. Praesent ac
-	    sodales sem. Phasellus id ultrices massa. Sed id erat sit amet magna
-	    accumsan vulputate eu at quam. Etiam feugiat semper imperdiet. Sed a sem
-	    vitae massa condimentum vestibulum. In vehicula, quam vel aliquet aliquam,
-	    enim elit placerat libero, at pretium nisi lorem in ex. Vestibulum lorem
-	    augue, semper a efficitur in, dictum vitae libero. Donec velit est,
-	    sollicitudin a volutpat quis, iaculis sit amet metus. Nulla at ante nec
-	    dolor euismod mattis cursus eu nisl.
-	  </p>
-	  <p>
-	    Quisque interdum facilisis consectetur. Nam eu purus purus. Curabitur in
-	    ligula quam. Nam euismod ligula eu tellus pellentesque laoreet. Aliquam
-	    erat volutpat. Curabitur eu bibendum velit. Cum sociis natoque penatibus
-	    et magnis dis parturient montes, nascetur ridiculus mus. Nunc efficitur
-	    lorem sit amet quam porta pharetra. Cras ultricies pellentesque eros sit
-	    amet semper.
-	  </p>
+	  <h1>
+	  	Ligas
+	  	<a ng-show="usuarioLogged" href="#/campeonato/0?next=/" class="mui-btn mui-btn--small mui-btn--primary mui-btn--fab">+</a>
+	  </h1>
+	  
+	  
+	  <div class="mui-panel mui-col-md-12 mui-col-xs-12 mui-row" ng-repeat="c in dashCtrl.campeonatos">
+	  	<div class="mui-col-md-1 mui-col-xs-3">
+	  		<a ng-click="dashCtrl.enterCampeonato(c)" href>
+	  			<img alt="" src="${pageContext.request.contextPath}/resources/static/img/bola_grama.gif" height="50" class="img-responsive" />
+	  		</a>
+	  	</div>
+	  	<div class="mui-col-md-8 mui-col-xs-8">
+	  		<a ng-click="dashCtrl.enterCampeonato(c)" href>
+		  		<span class="mui--text-display1">
+		  			{{ c.descricao }} 
+		  			<small> / {{ c.nome }} </small>
+		  		</span>
+		  	</a>
+		</div>
+	  	<div class="mui-col-md-3 mui-col-xs-1">
+	  		<a ng-show="usuarioLogged" href="#/jogos/{{c.id}}" class="mui-btn mui-btn--small mui-btn--danger">Jogos</a>
+	  	</div>
+	  </div>
+	  
+	  <h4 ng-show="!dashCtrl.campeonatos.length">Não há ligas cadastradas</h4>
+	  		
 </div>

@@ -11,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * @author Diego Lirio

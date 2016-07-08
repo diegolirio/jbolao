@@ -4,7 +4,7 @@
 	  <br>
 	  <h1>
 	  	Inscrição
-	  	<a href="#/participante/0/campeonato/{{ifCtrl.inscricao.campeonato.id}}?next={{ifCtrl.next}}" class="mui-btn mui-btn--small mui-btn--danger mui-btn--fab" title="Novo Participante">+</a>	  	
+	  	<a href="#/participante/0/campeonato/{{ifCtrl.inscricao.campeonato.id}}?next={{ifCtrl.nextPage}}" class="mui-btn mui-btn--small mui-btn--danger mui-btn--fab" title="Novo Participante">+</a>	  	
 	  </h1>
 	  
 	 <form ng-submit="ifCtrl.save(ifCtrl.inscricao)" name="formInscricao">
@@ -15,10 +15,10 @@
 
 	  <input type="hidden" ng-model="ifCtrl.inscricao.participante.id" name="participanteId" required="required">
 	  
-	  <div ng-show="ifCtrl.inscricao.participante">
-		  {{ ifCtrl.inscricao.participante | json}}
-	  </div>	  	  
-	  <div class="mui-textfield mui-textfield--float-label">
+<!-- 	  <div ng-show="ifCtrl.inscricao.participante"> -->
+<!-- 		  {{ ifCtrl.inscricao.participante | json}} -->
+<!-- 	  </div>	  	   -->
+	  <div class="mui-textfield mui-textfield--float-label has-danger">
 		  <label>Participante</label> 
 		  <div angucomplete-alt id="txtAutocomplete" placeholder="Participante" pause="100"
 						 selected-object="ifCtrl.aposSelecionarParticipante" local-data="ifCtrl.participantes" search-fields="nome"
@@ -28,7 +28,7 @@
 	   
 	  <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary" 
 	  		  ng-disabled="formInscricao.participanteId.$invalid">Salvar</button>
-	  <a href="#/inscricoes/por/campeonato/{{ifCtrl.inscricao.campeonato.id}}" class="mui-btn mui-btn--raised">Voltar</a>
+	  <a ng-href="{{ifCtrl.previousPage}}" class="mui-btn mui-btn--raised">Voltar</a>
 	  
 	</form>
 	

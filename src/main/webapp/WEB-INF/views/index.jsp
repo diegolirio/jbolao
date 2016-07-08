@@ -245,46 +245,27 @@
      	 
     </script>
   </head>
-  <body>
+  <body ng-controller="UsuarioSessionController as uSessionCtrl">
 	    <div id="sidedrawer" class="mui--no-user-select">
-	      <div id="sidedrawer-brand" class="mui--appbar-line-height">Brand.io</div>
-	      <div class="mui-divider"></div>
+	      <div id="sidedrawer-brand" class="mui--appbar-line-height"><a href="${pageContext.request.contextPath}">Bolão</a></div>
+	      <div class="mui-divider"></div> 
 	      <ul>
-	      	<li><strong><a href="#/campeonatos">Campeonatos</a></strong></li>
-	        <!-- 
-	        <li>
-	          <strong>Category 1</strong>
-	          <ul>
-	            <li><a href>Item 1</a></li>
-	            <li><a href>Item 2</a></li>
-	            <li><a href>Item 3</a></li>
-	          </ul>
-	        </li>
-	        <li>
-	          <strong>Category 2</strong>
-	          <ul>
-	            <li><a href="#">Item 1</a></li>
-	            <li><a href="#">Item 2</a></li>
-	            <li><a href="#">Item 3</a></li>
-	          </ul>
-	        </li>
-	        <li>
-	          <strong>Category 3</strong>
-	          <ul>
-	            <li><a href="#">Item 1</a></li>
-	            <li><a href="#">Item 2</a></li>
-	            <li><a href="#">Item 3</a></li>
-	          </ul>
-	        </li>
-	        -->
+	      	<!-- public -->
+	      	<li><a href="#/"><strong>Home</strong></a></li>
+	      	<li ng-show="campScope"><a href="#/classificacao/{{campScope.id}}"><strong>Classificação</strong></a></li>
+	      	<li ng-show="campScope"><a href="#/jogos/{{campScope.id}}"><strong>Jogos <small>(Tabela)</small></strong></a></li>
 	      </ul>
 	    </div>
 			<header id="header">
 			  <div class="mui-appbar mui--appbar-line-height">
 			    <div class="mui-container-fluid">
-			      <a class="sidedrawer-toggle mui--visible-xs-inline-block js-show-sidedrawer">###</a>
-			      <a class="sidedrawer-toggle mui--hidden-xs js-hide-sidedrawer">###</a>
-			      <span class="mui--text-title mui--visible-xs-inline-block">Brand.io</span>
+			      <a class="sidedrawer-toggle mui--visible-xs-inline-block js-show-sidedrawer menu">
+			      	<img src="${pageContext.request.contextPath}/resources/static/img/taxes-menu-icon-32X32.png"/>
+			      </a>
+			      <a class="sidedrawer-toggle mui--hidden-xs js-hide-sidedrawer menu">
+			      	<img src="${pageContext.request.contextPath}/resources/static/img/taxes-menu-icon-32X32.png"/>
+			      </a> 
+			      <a href="${pageContext.request.contextPath}"><span class="mui--text-title mui--visible-xs-inline-block">Bolão</span></a>
 			    </div>
 			  </div>
 			</header> 
@@ -293,27 +274,34 @@
 				<div ng-view></div>
 
 			</div>
+			 
+			<!-- 
 			<footer id="footer">
-			  <div class="mui-container-fluid">
-			    <br>
-			    Made with ### by <a href="https://www.muicss.com">MUI</a>
+			  <div class="mui-container">
+			    Made with by <a href="https://www.bolao.com">WhoseWon</a>
 			  </div>
 			</footer>
+			 -->
   </body>
   
   <script src="${pageContext.request.contextPath}/resources/static/core/app.js"></script>
   <!-- Controllers -->  
-  <script src="${pageContext.request.contextPath}/resources/static/core/controllers/campeonato-list-controller-1.0.0.js"></script>  
+  <script src="${pageContext.request.contextPath}/resources/static/core/controllers/usuario-session-controller-1.0.0.js"></script>  
+  <script src="${pageContext.request.contextPath}/resources/static/core/controllers/campeonato-dashboard-controller-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/campeonato-form-controller-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/jogo-list-controller-1.0.1.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/jogo-form-controller-1.0.1.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/inscricao-list-controller-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/inscricao-form-controller-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/participante-form-controller-1.0.1.js"></script>  
+  <script src="${pageContext.request.contextPath}/resources/static/core/controllers/aposta-list-controller-1.0.0.js"></script>  
+  <script src="${pageContext.request.contextPath}/resources/static/core/controllers/aposta-form-controller-1.0.0.js"></script>  
 	<!-- Services -->
+  <script src="${pageContext.request.contextPath}/resources/static/core/services/usuario-session-service-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/services/campeonato-service-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/services/jogo-service-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/services/inscricao-service-1.0.1.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/services/participante-service-1.0.0.js"></script>  
+  <script src="${pageContext.request.contextPath}/resources/static/core/services/aposta-service-1.0.0.js"></script>  
   
 </html>

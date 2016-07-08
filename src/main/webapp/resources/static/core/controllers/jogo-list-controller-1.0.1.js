@@ -40,6 +40,10 @@ app.controller('JogoListController', ['$routeParams', 'JogoService', 'Campeonato
 		});
 	}
 	
+	self.getStatusDescription = function(status) {
+		return JogoService.getStatusDescription(status);
+	}
+	
 	self.init();
 	
 }]);

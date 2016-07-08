@@ -1,5 +1,5 @@
-app.controller('CampeonatoFormController', ['$routeParams', 'CampeonatoService', 
-                                            function($routeParams, CampeonatoService) {
+app.controller('CampeonatoFormController', ['$location', '$routeParams', 'CampeonatoService', 
+                                            function($location, $routeParams, CampeonatoService) {
 
 	var self = this;
 
@@ -17,6 +17,8 @@ app.controller('CampeonatoFormController', ['$routeParams', 'CampeonatoService',
 		CampeonatoService.save(campeonato).then(function(resp) {
 			self.campeonato = resp.data;
 			alert("Gravado com sucesso!");
+			if($location.search().next)
+				$location.url($location.search().next); 
 		}, function(error) {
 			alert(JSON.stringify(error.data));
 		});

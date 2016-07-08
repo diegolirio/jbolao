@@ -1,6 +1,5 @@
 package br.com.jbolao.jbolao.models;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,24 +17,20 @@ public class Inscricao {
 	@ManyToOne
 	private Participante participante;
 	
-	@Column(columnDefinition="Default 0")
 	private int colocacao = 0;
 	
-	@Column(columnDefinition="Default 0")
 	private int pontos = 0;
 	
 	/**
 	 * Ex: Jogo 2 X 1 - Aposta 2 X 1 
 	 *     Jogo 2 X 4 - Aposta 2 X 4
 	 */ 
-	@Column(columnDefinition="Default 0")
 	private int acertoPlacar = 0; // 8 pontos
 
 	/**
 	 * Ex: Jogo 2 X 1 - Aposta 3 X 1 
 	 *     Jogo 2 X 3 - Aposta 2 X 4
 	 */
-	@Column(columnDefinition="Default 0")
 	private int acertoVencedorUmResultado = 0; // 5 pontos
 
 	/**
@@ -44,7 +39,6 @@ public class Inscricao {
 	 *   	Jogo 2 X 4 - Aposta 0 X 1
 	 *   	Jogo 1 X 1 - Aposta 2 X 2
 	 */
-	@Column(columnDefinition="Default 0")
 	private int acertoVencedor = 0; // 3 pontos
 
 	/**
@@ -53,7 +47,6 @@ public class Inscricao {
 	 *   	Jogo 2 X 4 - Aposta 2 X 1
 	 *   	Jogo 1 X 1 - Aposta 2 X 1
 	 */
-	@Column(columnDefinition="Default 0")
 	private int acertoSomenteUmResultado = 0; // 1 pontos
 
 	/**
@@ -62,7 +55,6 @@ public class Inscricao {
 	 *   	Jogo 2 X 4 - Aposta 3 X 1
 	 *   	Jogo 1 X 1 - Aposta 3 X 0
 	 */
-	@Column(columnDefinition="Default 0")
 	private int errouTudo = 0;
 	
 	public Long getId() {

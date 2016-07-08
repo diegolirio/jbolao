@@ -27,6 +27,12 @@ app.factory('JogoService', ['$http', function($http) {
 	var _backToInProccess = function(jogo) {
 		return $http.put('/jbolao/api/jogo/backtoinproccess', jogo);
 	}	
+	
+	var _getStatusDescription = function(status) {
+		if(status == 'EDICAO') return "Pendente";
+		if(status == 'EM_ANDAMENTO') return "Em Andamento";
+		if(status == 'FINALIZADO') return "Finalizado";
+	}
 
 	var _delete = function(jogo) {
 		return $http.delete('/jbolao/api/jogo/delete', jogo);
@@ -47,6 +53,8 @@ app.factory('JogoService', ['$http', function($http) {
 		finalize : _finalize,
 
 		backToInProccess : _backToInProccess,
+		
+		getStatusDescription : _getStatusDescription,
 		
 		delete : _delete
 		
