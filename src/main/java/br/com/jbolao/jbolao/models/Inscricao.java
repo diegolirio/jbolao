@@ -1,9 +1,14 @@
 package br.com.jbolao.jbolao.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
 public class Inscricao {
@@ -56,6 +61,10 @@ public class Inscricao {
 	 *   	Jogo 1 X 1 - Aposta 3 X 0
 	 */
 	private int errouTudo = 0;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="inscricao")
+	private List<Aposta> apostas;
 	
 	public Long getId() {
 		return id;

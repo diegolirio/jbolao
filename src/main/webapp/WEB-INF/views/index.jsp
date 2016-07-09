@@ -296,6 +296,7 @@
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/participante-form-controller-1.0.1.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/aposta-list-controller-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/aposta-form-controller-1.0.0.js"></script>  
+  <script src="${pageContext.request.contextPath}/resources/static/core/controllers/simulacao-controller-1.0.0.js"></script>  
 	<!-- Services -->
   <script src="${pageContext.request.contextPath}/resources/static/core/services/usuario-session-service-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/services/campeonato-service-1.0.0.js"></script>  

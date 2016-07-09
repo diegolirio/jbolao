@@ -35,7 +35,7 @@ app.controller('InscricaoListController', ['$routeParams', '$location', 'Campeon
 		//<!-- Calculo = TOTAL_JOGOS * PONTO_MAXIMO_8 * 100 / pontos_participante  -->
 		if(inscricao.pontos == 0) 
 			return 0;
-		return self.countJogos * 8 * 100 / inscricao.pontos;
+		return inscricao.pontos * 100 / (self.countJogos * 8);
 	}
 	
 	self.init();

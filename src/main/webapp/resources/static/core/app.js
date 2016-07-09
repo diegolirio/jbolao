@@ -12,6 +12,7 @@ app.config(['$routeProvider', '$httpProvider',
 		.when('/classificacao/:campeonatoId', { templateUrl: SERVER_APP + '/inscricao/list'})
 		.when('/jogos/:campeonatoId',  		  { templateUrl: SERVER_APP + '/jogo/list'})
 		.when('/aposta/:inscricaoId', 	  	  { templateUrl: SERVER_APP + '/aposta/list'})
+		.when('/simulacao/:campeonatoId', 	  { templateUrl: SERVER_APP + '/campeonato/simulacao'})
 		
 		// private
 		.when('/campeonato/:id', { templateUrl: SERVER_APP + '/campeonato/form'})

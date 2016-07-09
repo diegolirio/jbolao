@@ -13,18 +13,6 @@ import javax.persistence.OneToMany;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-/**
- * @author Diego Lirio
- *
- */
-/**
- * @author Diego Lirio
- *
- */
-/**
- * @author Diego Lirio
- *
- */
 @Entity
 public class Campeonato implements Serializable {
 

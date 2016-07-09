@@ -3,7 +3,7 @@
 <div class="mui-container" ng-controller="CampeonatoDashboardCrontroller as dashCtrl">
 	  <br>
 	  <h1>
-	  	Ligas
+<!-- 	  	Ligas -->
 	  	<a ng-show="usuarioLogged" href="#/campeonato/0?next=/" class="mui-btn mui-btn--small mui-btn--primary mui-btn--fab">+</a>
 	  </h1>
 	  

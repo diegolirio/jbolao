@@ -1,5 +1,7 @@
 package br.com.jbolao.jbolao.services;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +69,7 @@ public class CampeonatoService {
 		return campeonato;
 	}
 	
-	private int getPontos(Jogo jogo, Aposta aposta) {
+	public int getPontos(Jogo jogo, Aposta aposta) {
 		if(jogo.getResultadoA() == aposta.getResultadoA() && jogo.getResultadoB() == aposta.getResultadoB())
 			return RegrasCommon.ACERTOU_PLACAR;
 		if(jogo.getVencedor() == aposta.getVencedor() && aposta.getVencedor() != VencedorType.E && 
@@ -81,7 +83,7 @@ public class CampeonatoService {
 		return RegrasCommon.ERROU_TUDO;	
 	}
 	
-	public boolean calcularApostas(Jogo jogo) {
+	private boolean calcularApostas(Jogo jogo) {
 		List<Aposta> apostas = this.apostaService.findByJogo(jogo);
 		for (Aposta aposta : apostas) {
 			aposta.setPontos(this.getPontos(jogo, aposta));
@@ -142,7 +144,7 @@ public class CampeonatoService {
 	}
 
 
-	public boolean calculaClassificacao(Campeonato campeonato) {
+	private boolean calculaClassificacao(Campeonato campeonato) {
 		somaPontos(campeonato);
 		List<Inscricao> inscricoes = this.inscricaoService.findByCampeonatoOrderByRanking(campeonato); 
 		int colInc = 0;
@@ -201,6 +203,8 @@ public class CampeonatoService {
 	
 	// system_calcular_campeonato
 	public boolean calcular(Campeonato campeonato) {
+		if(campeonato.getStatus() != StatusType.EM_ANDAMENTO)
+			return false;
 		campeonato.setStatus(StatusType.CALCULANDO);
 		this.campeonatoRepository.save(campeonato);
 		calcularApostas(campeonato); 
@@ -209,6 +213,13 @@ public class CampeonatoService {
 		campeonato.setStatus(StatusType.EM_ANDAMENTO);
 		this.campeonatoRepository.save(campeonato);		
 		return true;
+	}
+
+	public List<Campeonato> findForCalc() {
+		Collection<StatusType> statusListJogo = new ArrayList<StatusType>();
+		statusListJogo.add(StatusType.EM_ANDAMENTO);
+		statusListJogo.add(StatusType.FINALIZADO);
+		return this.campeonatoRepository.findByStatusAndInscricoesApostasCalculadoAndInscricoesApostasJogoStatusIn(StatusType.EM_ANDAMENTO, false, statusListJogo);
 	}
 
 }
