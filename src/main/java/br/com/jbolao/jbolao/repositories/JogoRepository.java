@@ -1,5 +1,6 @@
 package br.com.jbolao.jbolao.repositories;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
@@ -19,6 +20,8 @@ public interface JogoRepository extends CrudRepository<Jogo, Long> {
 
 	int countByCampeonatoAndStatusNot(Campeonato campeonato, StatusType status);
 
-	List<Jogo> findByCampeonatoInscricoes(Inscricao inscricao);  
+	List<Jogo> findByCampeonatoInscricoes(Inscricao inscricao);
+
+	int countByCampeonatoAndStatusIn(Campeonato campeonato, Collection<StatusType> statusList);  
 
 }

@@ -36,10 +36,8 @@
 			<span class="mui-col-md-1 mui--text-title mui--text-center">{{ i.acertoVencedorUmResultado }}</span> 
 			<span class="mui-col-md-1 mui--text-title mui--text-center">{{ i.acertoVencedor }}</span> 
 			<span class="mui-col-md-1 mui--text-title mui--text-center">{{ i.acertoSomenteUmResultado }}</span> 
-			<span class="mui-col-md-1 mui--text-title mui--text-center">{{ i.errouTudo }}</span>
-			<!-- TOTAL_JOGOS = todos os jogos daquele campeonato onde Status != EDICAO  --> 
-			<!-- Calculo = TOTAL_JOGOS * PONTO_MAXIMO-8 * 100 / pontos_participante  --> 
-			<span class="mui-col-md-1 mui--text-title mui--text-center">{{ 0 }}%</span> 
+			<span class="mui-col-md-1 mui--text-title mui--text-center">{{ i.errouTudo }}</span> 
+			<span class="mui-col-md-1 mui--text-title mui--text-center">{{ ilCtrl.calcPercent(i) }}%</span> 
 		  </div>	
 	  </a>	
 	  

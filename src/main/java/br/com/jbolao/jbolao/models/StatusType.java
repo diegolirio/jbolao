@@ -4,6 +4,7 @@ public enum StatusType {
 
 	EDICAO,
 	EM_ANDAMENTO,
+	CALCULANDO,
 	FINALIZADO
 	
 }

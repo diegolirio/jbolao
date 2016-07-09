@@ -17,6 +17,14 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  * @author Diego Lirio
  *
  */
+/**
+ * @author Diego Lirio
+ *
+ */
+/**
+ * @author Diego Lirio
+ *
+ */
 @Entity
 public class Campeonato implements Serializable {
 
@@ -47,6 +55,14 @@ public class Campeonato implements Serializable {
 	@OneToMany(mappedBy="campeonato")
 	private List<Jogo> jogos;
 	
+	private boolean alteraApostaAntesJogo = false;
+	
+	public Campeonato() {}
+	
+	public Campeonato(Long id) {
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -95,6 +111,14 @@ public class Campeonato implements Serializable {
 		this.jogos = jogos;
 	}
 
+	public boolean isAlteraApostaAntesJogo() {
+		return alteraApostaAntesJogo;
+	}
+
+	public void setAlteraApostaAntesJogo(boolean alteraApostaAntesJogo) {
+		this.alteraApostaAntesJogo = alteraApostaAntesJogo;
+	}
+	
 	@Override
 	public String toString() {
 		return "Campeonato [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", status=" + status + "]";

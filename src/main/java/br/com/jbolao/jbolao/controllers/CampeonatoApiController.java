@@ -89,5 +89,11 @@ public class CampeonatoApiController {
 		} 
 	}
 
+	@RequestMapping(value="/calcular/{id}", produces="application/json")
+	public ResponseEntity<String> executaCalculo(@PathVariable("id") Long id) {
+		Campeonato campeonato = this.campeonatoService.findOne(id);
+		this.campeonatoService.calcular(campeonato);
+		return new ResponseEntity<String>("{\"calculado\": true}", HttpStatus.OK);
+	}
 	
 }

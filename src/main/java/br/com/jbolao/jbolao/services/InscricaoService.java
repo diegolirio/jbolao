@@ -53,4 +53,8 @@ public class InscricaoService {
 		return this.inscricaoRepository.findByCampeonatoJogos(jogo);
 	}
 
+	public List<Inscricao> findByCampeonatoOrderByRanking(Campeonato campeonato) {
+		return this.inscricaoRepository.findByCampeonatoOrderByPontosDescAcertoPlacarDescAcertoVencedorUmResultadoDescAcertoVencedorDescAcertoSomenteUmResultadoDesc(campeonato);
+	}
+
 }

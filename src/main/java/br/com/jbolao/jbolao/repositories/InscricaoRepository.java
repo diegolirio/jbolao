@@ -14,6 +14,8 @@ public interface InscricaoRepository extends CrudRepository<Inscricao, Long> {
 
 	List<Inscricao> findByCampeonato(Campeonato campeonato);
  
-	List<Inscricao> findByCampeonatoJogos(Jogo jogo); 
+	List<Inscricao> findByCampeonatoJogos(Jogo jogo);
+  
+	List<Inscricao> findByCampeonatoOrderByPontosDescAcertoPlacarDescAcertoVencedorUmResultadoDescAcertoVencedorDescAcertoSomenteUmResultadoDesc(Campeonato campeonato);
 
 }

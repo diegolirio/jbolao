@@ -1,5 +1,6 @@
 package br.com.jbolao.jbolao.services;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import br.com.jbolao.jbolao.models.Campeonato;
 import br.com.jbolao.jbolao.models.Inscricao;
 import br.com.jbolao.jbolao.models.Jogo;
 import br.com.jbolao.jbolao.models.StatusType;
+import br.com.jbolao.jbolao.models.VencedorType;
 import br.com.jbolao.jbolao.repositories.JogoRepository;
 
 @Service
@@ -27,22 +29,36 @@ public class JogoService {
 	public List<Jogo> findByCampeonato(Campeonato campeonato) {
 		return this.jogoRepository.findByCampeonato(campeonato);
 	}
-
-	public Jogo save(Jogo jogo) {
-		boolean novaJogo = jogo.getId() == null || this.jogoRepository.exists(jogo.getId()) == false;
-		jogo = this.jogoRepository.save(jogo);
-		if(novaJogo) {
-			List<Inscricao> inscricoes = this.inscricaoService.findByCampeonatoJogos(jogo);
-			for (Inscricao inscricao : inscricoes) {
-				Aposta a = new Aposta();
-				a.setCalculado(false);
-				a.setInscricao(inscricao);
-				a.setJogo(jogo);
-				a.setResultadoA(0);
-				a.setResultadoB(0);
-				this.apostaService.save(a);
-			}
+	
+	public VencedorType getVencedor(Jogo jogo) {
+		if(jogo.getResultadoA() > jogo.getResultadoB())
+			return VencedorType.A;
+		if(jogo.getResultadoA() < jogo.getResultadoB())
+			return VencedorType.B;
+		return VencedorType.E;
+	}
+	
+	private boolean insertApostas(Jogo jogo) {
+		List<Inscricao> inscricoes = this.inscricaoService.findByCampeonatoJogos(jogo);
+		for (Inscricao inscricao : inscricoes) {
+			Aposta a = new Aposta();
+			a.setCalculado(false);
+			a.setInscricao(inscricao);
+			a.setJogo(jogo);
+			a.setResultadoA(0);
+			a.setResultadoB(0);
+			this.apostaService.save(a);
 		}
+		return true;
+	}
+	
+	public Jogo save(Jogo jogo) {
+		boolean novoJogo = jogo.getId() == null || this.jogoRepository.exists(jogo.getId()) == false;
+		if(novoJogo == false) 
+			jogo.setVencedor(this.getVencedor(jogo));
+		jogo = this.jogoRepository.save(jogo);
+		if(novoJogo) 
+			this.insertApostas(jogo);
 		return jogo;
 	}
 
@@ -110,6 +126,10 @@ public class JogoService {
 
 	public List<Jogo> findByCampeonatoInscricoes(Inscricao inscricao) {
 		return this.jogoRepository.findByCampeonatoInscricoes(inscricao);
+	}
+
+	public int countByCampeonatoAndStatusIn(Campeonato campeonato, Collection<StatusType> statusList) {
+		return this.jogoRepository.countByCampeonatoAndStatusIn(campeonato, statusList);
 	}
 
 	

@@ -21,16 +21,18 @@ public class ApostaService {
 		return this.apostaRepository.findByInscricao(inscricao);
 	}
 
+	public VencedorType getVencedor(Aposta aposta) {
+		if(aposta.getResultadoA() > aposta.getResultadoB()) 
+			return VencedorType.A;
+		if(aposta.getResultadoA() < aposta.getResultadoB()) 
+			return VencedorType.B;
+		return VencedorType.E;	
+	}
+	
 	public Aposta save(Aposta aposta) {
 		boolean newAposta = aposta.getId() != null || !this.apostaRepository.exists(aposta.getId());
-		if(newAposta == false) {
-			if(aposta.getResultadoA() > aposta.getResultadoB()) 
-				aposta.setVencedor(VencedorType.A);
-			else if(aposta.getResultadoA() < aposta.getResultadoB()) 
-				aposta.setVencedor(VencedorType.B);
-			else 
-				aposta.setVencedor(VencedorType.E);
-		}
+		if(newAposta == false) 
+			aposta.setVencedor(this.getVencedor(aposta));
 		return this.apostaRepository.save(aposta);
 	}
 
@@ -40,6 +42,14 @@ public class ApostaService {
 
 	public Aposta findOne(Long id) {
 		return this.apostaRepository.findOne(id);
+	}
+
+	public List<Aposta> findByJogo(Jogo jogo) {
+		return this.apostaRepository.findByJogo(jogo);
+	}
+
+	public List<Aposta> findByInscricaoAndColocacao(Inscricao inscricao, int colocacao) {
+		return this.apostaRepository.findByInscricaoAndColocacao(inscricao, colocacao);
 	}
 
 }

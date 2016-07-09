@@ -34,6 +34,10 @@ app.factory('JogoService', ['$http', function($http) {
 		if(status == 'FINALIZADO') return "Finalizado";
 	}
 
+	var _countByCampeonatoAndamentoAndFinalizado = function(campeonato) {
+		return $http.get('/jbolao/api/jogo/countjogosemandamentofinalizado/'+campeonato.id);
+	}
+	
 	var _delete = function(jogo) {
 		return $http.delete('/jbolao/api/jogo/delete', jogo);
 	}
@@ -55,6 +59,8 @@ app.factory('JogoService', ['$http', function($http) {
 		backToInProccess : _backToInProccess,
 		
 		getStatusDescription : _getStatusDescription,
+	
+		countByCampeonatoAndamentoAndFinalizado : _countByCampeonatoAndamentoAndFinalizado,
 		
 		delete : _delete
 		

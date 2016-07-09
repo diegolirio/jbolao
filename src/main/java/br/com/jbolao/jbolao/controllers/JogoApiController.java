@@ -1,5 +1,7 @@
 package br.com.jbolao.jbolao.controllers;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.jbolao.jbolao.models.Campeonato;
 import br.com.jbolao.jbolao.models.Jogo;
+import br.com.jbolao.jbolao.models.StatusType;
 import br.com.jbolao.jbolao.services.JogoService;
 
 @Controller
@@ -110,6 +113,20 @@ public class JogoApiController {
 		try {
 			jogo = this.jogoService.backToInProccess(jogo);
 			return new ResponseEntity<String>(new ObjectMapper().writeValueAsString(jogo), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		} 
+	}
+	
+	@RequestMapping(value="/countjogosemandamentofinalizado/{campeonatoId}", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
+	public ResponseEntity<String> backToInProccess(@PathVariable("campeonatoId") Long campeonatoId) {
+		try {
+			Collection<StatusType> statusList = new ArrayList<StatusType>();
+			statusList.add(StatusType.EM_ANDAMENTO);
+			statusList.add(StatusType.FINALIZADO);
+			int countJogos = this.jogoService.countByCampeonatoAndStatusIn(new Campeonato(campeonatoId), statusList );
+			return new ResponseEntity<String>("{\"countJogos\": "+countJogos+"}", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
