@@ -18,6 +18,11 @@ public class NavigationController {
 		return "login";
 	}
 
+	@RequestMapping(value = "/regras", method = RequestMethod.GET)
+	public String regras() {
+		return "regras";
+	}
+
 	@RequestMapping(value="campeonato/dashboard")
 	public String campeonatoDashboard() {
 		return "campeonato/dashboard";
@@ -36,6 +41,11 @@ public class NavigationController {
 	@RequestMapping(value="/aposta/list")
 	public String apostaList() {
 		return "aposta/list"; 
+	}
+	
+	@RequestMapping(value="/aposta/listbyjogo")
+	public String apostaListByJogo() {
+		return "aposta/list-by-jogo"; 
 	}
 
 	@RequestMapping(value="/aposta/form")

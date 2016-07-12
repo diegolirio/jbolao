@@ -23,8 +23,8 @@ public class InscricaoService {
 	@Autowired
 	private ApostaService apostaService;
 
-	public List<Inscricao> findByCampeonato(Campeonato campeonato) {
-		return this.inscricaoRepository.findByCampeonato(campeonato);
+	public List<Inscricao> findByCampeonatoOrderByColocacao(Campeonato campeonato) {
+		return this.inscricaoRepository.findByCampeonatoOrderByColocacao(campeonato);
 	}
 
 	public Inscricao findOne(Long id) {
@@ -49,8 +49,8 @@ public class InscricaoService {
 		return inscricao;
 	}
 
-	public List<Inscricao> findByCampeonatoJogos(Jogo jogo) {
-		return this.inscricaoRepository.findByCampeonatoJogos(jogo);
+	public List<Inscricao> findByCampeonatoJogosOrderByColocacao(Jogo jogo) {
+		return this.inscricaoRepository.findByCampeonatoJogosOrderByColocacao(jogo);
 	}
 
 	public List<Inscricao> findByCampeonatoOrderByRanking(Campeonato campeonato) {

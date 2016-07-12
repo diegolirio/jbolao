@@ -12,9 +12,9 @@ import br.com.jbolao.jbolao.models.Jogo;
 @Repository
 public interface InscricaoRepository extends CrudRepository<Inscricao, Long> {
 
-	List<Inscricao> findByCampeonato(Campeonato campeonato);
+	List<Inscricao> findByCampeonatoOrderByColocacao(Campeonato campeonato);
  
-	List<Inscricao> findByCampeonatoJogos(Jogo jogo);
+	List<Inscricao> findByCampeonatoJogosOrderByColocacao(Jogo jogo);
   
 	List<Inscricao> findByCampeonatoOrderByPontosDescAcertoPlacarDescAcertoVencedorUmResultadoDescAcertoVencedorDescAcertoSomenteUmResultadoDesc(Campeonato campeonato);
 

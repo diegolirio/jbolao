@@ -27,7 +27,7 @@ public class InscricaoApiController {
 	@RequestMapping(value="/findbycampeonato", method=RequestMethod.GET, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
 	public ResponseEntity<String> findByCampeonato(@RequestBody Campeonato campeonato) {
 		try {
-			List<Inscricao> list = this.inscricaoService.findByCampeonato(campeonato);
+			List<Inscricao> list = this.inscricaoService.findByCampeonatoOrderByColocacao(campeonato);
 			return new ResponseEntity<String>(new ObjectMapper().writeValueAsString(list), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -41,7 +41,7 @@ public class InscricaoApiController {
 		try {
 			Campeonato campeonato = new Campeonato();
 			campeonato.setId(campeonatoId);
-			List<Inscricao> list = this.inscricaoService.findByCampeonato(campeonato);
+			List<Inscricao> list = this.inscricaoService.findByCampeonatoOrderByColocacao(campeonato);
 			return new ResponseEntity<String>(new ObjectMapper().writeValueAsString(list), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

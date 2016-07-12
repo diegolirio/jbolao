@@ -39,7 +39,7 @@ public class JogoService {
 	}
 	
 	private boolean insertApostas(Jogo jogo) {
-		List<Inscricao> inscricoes = this.inscricaoService.findByCampeonatoJogos(jogo);
+		List<Inscricao> inscricoes = this.inscricaoService.findByCampeonatoJogosOrderByColocacao(jogo);
 		for (Inscricao inscricao : inscricoes) {
 			Aposta a = new Aposta();
 			a.setCalculado(false);
@@ -121,6 +121,13 @@ public class JogoService {
 		if(jogo.getCampeonato().getStatus() != StatusType.EM_ANDAMENTO) 
 			throw new RuntimeException("Campeonato Deve estar em Em Andamento");
 		jogo.setStatus(StatusType.EM_ANDAMENTO);
+		// TODO: voltar aposta para nao calculados | testar rotina abaixo: 
+		//this.apostaService.setFixedCalculadoFor(false, jogo);
+		List<Aposta> apostas = this.apostaService.findByJogo(jogo);
+		for (Aposta aposta : apostas) {
+			aposta.setCalculado(false);
+			this.apostaService.save(aposta);
+		}
 		jogo = this.save(jogo);
 		return jogo;
 	}

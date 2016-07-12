@@ -254,6 +254,7 @@
 	      	<li><a href="#/"><strong>Home</strong></a></li>
 	      	<li ng-show="campScope"><a href="#/classificacao/{{campScope.id}}"><strong>Classificação</strong></a></li>
 	      	<li ng-show="campScope"><a href="#/jogos/{{campScope.id}}"><strong>Jogos <small>(Tabela)</small></strong></a></li>
+	      	<li><a href="#/regras"><strong>Regras</strong></a></li>
 	      	<li ng-show="!usuarioLogged"><a href="#/login"><strong>Login</strong></a></li>
 	      	<li ng-show="usuarioLogged"><a href ng-click="uSessionCtrl.logout()"><strong>Sair</strong></a></li>
 	      </ul>
@@ -298,6 +299,7 @@
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/inscricao-form-controller-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/participante-form-controller-1.0.1.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/aposta-list-controller-1.0.0.js"></script>  
+  <script src="${pageContext.request.contextPath}/resources/static/core/controllers/apostas-jogo-controller-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/aposta-form-controller-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/simulacao-controller-1.0.0.js"></script>  
 	<!-- Services -->

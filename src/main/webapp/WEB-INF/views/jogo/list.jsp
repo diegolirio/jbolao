@@ -29,7 +29,8 @@
 	  </div>	
 	  
 	  <div class="mui-row">
-		  <a ng-show="usuarioLogged" href="#/jogo/{{j.id}}/campeonato/{{jCtrl.campeonato.id}}" ng-repeat="j in jCtrl.jogos">	
+<!-- 		  <a href="#/jogo/{{j.id}}/campeonato/{{jCtrl.campeonato.id}}" ng-repeat="j in jCtrl.jogos">	 -->
+		  <a href="#/apostas_por_jogo/{{j.id}}" ng-repeat="j in jCtrl.jogos">
 			  <div class="mui-panel mui-col-md-6 mui--text-center">
 				<div class="mui-row">
 					<span class="mui-col-md-4 mui--text-headline ">{{j.timeA}}</span> 
@@ -40,28 +41,14 @@
 				</div>
 				<br/>
 				<div class="mui-row">
-			  		<span class="mui--text-caption">{{jCtrl.getStatusDescription(j.status)}}</span>
+			  		<span class="mui--text-caption">
+			  			Rodada: {{j.rodada}} | {{jCtrl.getStatusDescription(j.status)}}
+			  		</span>
 			    </div>
 				
 			  </div>	
 		  </a>	
 	  </div>
-
-	  <div class="mui-row">
-		  <div ng-show="!usuarioLogged" class="mui-panel mui-col-md-6 mui--text-center" ng-repeat="j in jCtrl.jogos">
-		  	<div class="mui-row">
-		  		<span class="mui--text-caption">{{jCtrl.getStatusDescription(j.status)}}</span>
-		  	</div>
-		  	<br/>
-		  	<div class="mui-row">
-				<span class="mui-col-md-4 mui--text-headline ">{{j.timeA}}</span> 
-				<span class="mui-col-md-1"><span ng-hide="j.status == 'EDICAO'">{{j.resultadoA}}</span></span> 
-				<span class="mui-col-md-1">X</span> 
-				<span class="mui-col-md-1"><span ng-hide="j.status == 'EDICAO'">{{j.resultadoB}}</span></span> 
-				<span class="mui-col-md-4 mui--text-headline">{{j.timeB}}</span>
-			</div>
-		  </div>	
-	  </div>	  
 
 	  <div class="mui-row">
 	  	<h4 ng-show="!jCtrl.jogos.length">Não há jogos cadastrados</h4>

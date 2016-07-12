@@ -23,7 +23,7 @@ public class CalculateScoreSchedule {
 	@Autowired
 	private CampeonatoService campeonatoService;
 	
-	@Scheduled(fixedRate = 120000)
+	@Scheduled(fixedRate = 6000)
 	public synchronized void execute() {
 		logger.info("execute()... " + new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(Calendar.getInstance().getTime()));
 		List<Campeonato> list = this.campeonatoService.findForCalc();

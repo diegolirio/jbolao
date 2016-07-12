@@ -137,7 +137,7 @@ public class CampeonatoService {
 
 	private void somaPontos(Campeonato campeonato) {
 		// calcula colocacao apostas
-		List<Inscricao> inscricoesSoma = this.inscricaoService.findByCampeonato(campeonato);
+		List<Inscricao> inscricoesSoma = this.inscricaoService.findByCampeonatoOrderByColocacao(campeonato);
 		for (Inscricao inscricao : inscricoesSoma) {
 			somaPontos(inscricao);		
 		}
@@ -176,7 +176,7 @@ public class CampeonatoService {
 		
 		// Finaliza calculo da aposta apos finalizar jogo | guarda historico da colocacao no momento da rodada
 		// filtrar novamente as inscricoes ja alteradas a colocacao...
-		List<Inscricao> inscricoesColocacao = inscricaoService.findByCampeonato(campeonato);
+		List<Inscricao> inscricoesColocacao = inscricaoService.findByCampeonatoOrderByColocacao(campeonato);
 		for (Inscricao inscricao : inscricoesColocacao) {
 			// Colocacao (-1) alterado no metodo -> calcularApostas
 			List<Aposta> apostas = apostaService.findByInscricaoAndColocacao(inscricao, -1);
@@ -194,7 +194,7 @@ public class CampeonatoService {
 	}
 
 	private void calculoDefinitivo(Campeonato campeonato) {
-		List<Inscricao> inscricoes = inscricaoService.findByCampeonato(campeonato);
+		List<Inscricao> inscricoes = inscricaoService.findByCampeonatoOrderByColocacao(campeonato);
 		for (Inscricao inscricao : inscricoes) {
 			somaPontos(inscricao);		
 			calculaClassificacao(campeonato);

@@ -26,15 +26,17 @@
 	  </div>	  
 	  	
 	  <div class="mui-panel mui-col-md-12 mui--text-center" ng-repeat="a in alCtrl.apostas">
-		<div class="mui-row"> 
-			<span class="mui-col-md-3 mui--text-headline ">{{a.jogo.timeA}}</span> 
+		<div class="mui-row">
+			<span class="mui-col-md-1 mui--text-subhead mui--text-center mui--text-danger mui--text-center">#{{ a.jogo.rodada }}</span>
+			<span class="mui-col-md-2 mui--text-headline ">{{a.jogo.timeA}}</span> 
 			<span class="mui-col-md-1"><span ng-hide="a.jogo.status == 'EDICAO'">{{a.jogo.resultadoA}}</span></span> 
 			<span class="mui-col-md-1">X</span>  
 			<span class="mui-col-md-1"><span ng-hide="a.jogo.status == 'EDICAO'">{{a.jogo.resultadoB}}</span></span> 
-			<span class="mui-col-md-3 mui--text-headline">{{a.jogo.timeB}}</span>
+			<span class="mui-col-md-2 mui--text-headline">{{a.jogo.timeB}}</span>
 			<span class="mui-col-md-3 mui--text-headline">
 				<a href="#/aposta/edit/{{a.id}}" ng-show="usuarioLogged && a.jogo.status == 'EDICAO'">{{a.resultadoA}} X {{a.resultadoB}}</a>
 				<span ng-show="!usuarioLogged && alCtrl.inscricao.campeonato.alteraApostaAntesJogo == false || a.jogo.status != 'EDICAO'">{{a.resultadoA}} X {{a.resultadoB}}</span>
+				<span class="mui--text-subhead mui--text-center mui--text-accent mui--text-center">+{{ a.pontos }}</span>
 			</span>
 		</div>
 	  </div>	

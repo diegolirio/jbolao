@@ -17,8 +17,9 @@ app.controller('CampeonatoDashboardCrontroller', ['$route', '$location', 'Campeo
 	
 	self.enterCampeonato = function(campeonato) {
 		UsuarioSessionService.setCampeonatoSession(campeonato).then(function(resp) {
-			$location.path('/classificacao/'+campeonato.id); 
-			$route.reload();
+			//$location.path('/classificacao/'+campeonato.id); 
+			//$route.reload();
+			window.location.href = '/jbolao/#/classificacao/'+campeonato.id;
 		}, function(error) {
 			alert(JSON.stringify(error));
 		});

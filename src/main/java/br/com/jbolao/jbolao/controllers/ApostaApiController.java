@@ -52,10 +52,10 @@ public class ApostaApiController {
 		} 
 	}
 	
-	@RequestMapping(value="/findbyjogorodadaorderbyinscricaoid/{rodada}", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
-	public ResponseEntity<String> findByJogoRodada(@PathVariable("rodada") String rodada) {
+	@RequestMapping(value="/findbycampeonatoandjogorodada/{campeonatoId}/{rodada}", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
+	public ResponseEntity<String> findByJogoCampeonatoAndJogoRodadaByInscricaoId(@PathVariable("campeonatoId") Long campeonatoId, @PathVariable("rodada") String rodada) {
 		try {
-			List<Aposta> list = this.apostaService.findByJogoRodadaOrderByInscricaoId(rodada);
+			List<Aposta> list = this.apostaService.findByJogoRodadaAndJogoCampeonatoIdOrderByInscricaoId(rodada, campeonatoId); 
 			return new ResponseEntity<String>(new ObjectMapper().writeValueAsString(list), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

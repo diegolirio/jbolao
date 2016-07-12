@@ -2,6 +2,8 @@ package br.com.jbolao.jbolao.repositories;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -25,6 +27,12 @@ public interface ApostaRepository extends CrudRepository<Aposta, Long> {
 	List<Aposta> findByInscricaoCampeonatoAndJogoStatus(Campeonato campeonato, StatusType statusType);
 	
 	List<Aposta> findByJogoRodadaOrderByInscricaoId(String rodada);
+
+	@Modifying
+	@Query("update Aposta a set a.calculado = ?1 where a.jogo = ?2")
+	int setFixedCalculadoFor(Boolean calculado, Jogo jogo);
+
+	List<Aposta> findByJogoRodadaAndJogoCampeonatoIdOrderByInscricaoId(String rodada, Long campeonatoId);
 	
 
 }

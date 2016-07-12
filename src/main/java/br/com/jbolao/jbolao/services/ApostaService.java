@@ -57,8 +57,12 @@ public class ApostaService {
 		return this.apostaRepository.findByInscricaoCampeonatoAndJogoStatus(campeonato, statusType);
 	}
  
-	public List<Aposta> findByJogoRodadaOrderByInscricaoId(String rodada) {
-		return this.apostaRepository.findByJogoRodadaOrderByInscricaoId(rodada);
+	public void setFixedCalculadoFor(boolean calculado, Jogo jogo) {
+		this.apostaRepository.setFixedCalculadoFor(calculado, jogo);
+	}
+
+	public List<Aposta> findByJogoRodadaAndJogoCampeonatoIdOrderByInscricaoId(String rodada, Long campeonatoId) {
+		return this.apostaRepository.findByJogoRodadaAndJogoCampeonatoIdOrderByInscricaoId(rodada, campeonatoId);
 	}
 
 }

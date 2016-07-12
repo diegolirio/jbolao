@@ -159,7 +159,7 @@ app.controller('SimulacaoCrontroller', ['$routeParams', 'CampeonatoService', 'Jo
 						self.apostas[apostaIndex].pontos = 5;
 				else 
 					if(SimuladorCommon.acertouVencedor(self.apostas[apostaIndex], self.jogos[self.index]) == true) 
-						self.apostas[apostaIndex].pontos = 3;
+						self.apostas[apostaIndex].pontos = 4;
 				else
 					if(SimuladorCommon.acertouSomenteUmResultado(self.apostas[apostaIndex], self.jogos[self.index]) == true) 
 						self.apostas[apostaIndex].pontos = 1;

@@ -13,6 +13,8 @@ app.config(['$routeProvider', '$httpProvider',
 		.when('/jogos/:campeonatoId',  		  { templateUrl: SERVER_APP + '/jogo/list'})
 		.when('/aposta/:inscricaoId', 	  	  { templateUrl: SERVER_APP + '/aposta/list'})
 		.when('/simulacao/:campeonatoId', 	  { templateUrl: SERVER_APP + '/campeonato/simulacao'})
+		.when('/apostas_por_jogo/:jogoId',    { templateUrl: SERVER_APP + '/aposta/listbyjogo'})
+		.when('/regras', 	  				  { templateUrl: SERVER_APP + '/regras'})
 		.when('/login', 	  				  { templateUrl: SERVER_APP + '/login'})
 		
 		// private

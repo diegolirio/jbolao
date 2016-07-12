@@ -47,32 +47,102 @@ app.controller('InscricaoRanckingController', ['$routeParams', '$location', 'Cam
 				pontos += self.apostasFilter[i].pontos;
 			}
 		}
+		console.log(pontos);  
 		return pontos;
 	}
+
+	var _clearPontuacaoInscricaoFilter = function() {
+		for(var ii in self.inscricoesFilter) {
+			self.inscricoesFilter[ii].pontos = 0;
+			self.inscricoesFilter[ii].acertoPlacar = 0;
+			self.inscricoesFilter[ii].acertoVencedorUmResultado = 0;
+			self.inscricoesFilter[ii].acertoVencedor = 0;
+			self.inscricoesFilter[ii].acertoSomenteUmResultado = 0;
+			self.inscricoesFilter[ii].errouTudo = 0;
+			self.inscricoesFilter[ii].jogos = 0;
+		}
+	}
+	
+
+	var _newInscricao = function(inscricao) {
+		var inscricaoNew = {};
+		inscricaoNew.id = inscricao.id;
+		inscricaoNew.pontos = inscricao.pontos; 
+		inscricaoNew.participante = {};
+		inscricaoNew.participante.nome = inscricao.participante.nome;
+		inscricaoNew.pontosSomados = inscricao.pontosSomados;
+		//inscricaoNew.jogoResultadoA = inscricao.jogoResultadoA;
+		//inscricaoNew.jogoResultadoB = inscricao.jogoResultadoB;
+		return inscricaoNew;
+	}
+	
+	var _reordenarRanking = function() {
+		var inscricoesOrder = [];
+		for(var i = 0; i <= self.inscricoesFilter.length-1; i++) {
+			self.inscricoesFilter[i].order = false; 
+		}		
+		
+		var insc_maoir = {};
+		insc_maoir.pontos = -1;
+		
+		for(var i = 0; i <= self.inscricoesFilter.length-1; i++) { // loop para setar colocacao
+			
+			
+			for(var i_maior in self.inscricoesFilter) { // pega o primeiro ao ultimo
+				if(self.inscricoesFilter[i_maior].order == false) {
+					if(self.inscricoesFilter[i_maior].pontos > insc_maoir.pontos) {
+						insc_maoir = self.inscricoesFilter[i_maior];
+					}
+					console.log(self.inscricoesFilter[i_maior].participante.nome + ' - ' + self.inscricoesFilter[i_maior].pontos + 
+							' | Maior: ' + insc_maoir.pontos + ' - ' + insc_maoir.participante.nome);					
+				}
+			}
+			
+			for(var i_add = 0; i_add <= self.inscricoesFilter.length-1; i_add++) { // Add o primeiro ao ultimo
+				console.log(self.inscricoesFilter[i_add]);
+				if(self.inscricoesFilter[i_add].id == insc_maoir.id) {
+					console.log("============ Push: " + self.inscricoesFilter[i_add].participante.nome + " ==============");		
+					self.inscricoesFilter[i_add].order = true;
+					self.inscricoesFilter[i_add].colocacao = i;
+					inscricoesOrder.push(_newInscricao(insc_maoir));
+					insc_maoir = {};
+					insc_maoir.pontos = -1;
+				}
+			}
+			console.log(" ---------------------------------------------------------------------- ");
+		}
+		console.log(" Init order ");
+		// Colocar em ordem de classificacao
+		for(var aux in inscricoesOrder) {
+			self.inscricoesFilter[aux].id = inscricoesOrder[aux].id;
+			self.inscricoesFilter[aux].campeonato = inscricoesOrder[aux].campeonato;
+			self.inscricoesFilter[aux].participante.nome = inscricoesOrder[aux].participante.nome;
+			self.inscricoesFilter[aux].colocacao = inscricoesOrder[aux].colocacao;
+			self.inscricoesFilter[aux].pontos = inscricoesOrder[aux].pontos;
+			self.inscricoesFilter[aux].pontosSomados = inscricoesOrder[aux].pontosSomados;
+			self.inscricoesFilter[aux].jogoResultadoA = inscricoesOrder[aux].jogoResultadoA;
+			self.inscricoesFilter[aux].jogoResultadoB = inscricoesOrder[aux].jogoResultadoB;
+		}
+	}
+	
 	
 	self.executaFiltro = function(filtro) {
-		//ApostaService.executeFilter(filtro).then(function(resp) {
-		//	self.apostas = resp.data;
-		//}, function(error) { 
-		//	alert(JSON.stringify(error));
-		//});
-		ApostaService.findByJogoRodadaOrderByInscricaoId(filtro.rodada).then(function(resp) {
+		ApostaService.findByCampeonatoAndJogoRodadaOrderByInscricao(self.campeonato, filtro.rodada).then(function(resp) {
 			self.apostasFilter = resp.data;
 			return resp;
 		}).then(function(apostaResp) {
-			self.inscricoesFilter = [];
-			var id = -1;
-			for(var i in self.apostasFilter) {
-				if(self.apostasFilter[i].inscricao.id != id) {
-					inscr = {};
-					inscr.id = self.apostasFilter[i].inscricao.id;
-					inscr.participante = self.apostasFilter[i].inscricao.participante;
-					inscr.pontos = countTotalPontosByInscricao(inscr);
-					self.inscricoesFilter.push(inscr);
-					console.log(self.inscricoesFilter);
+			InscricaoService.findByCampeonato(self.campeonato).then(function(resp) {
+				self.inscricoesFilter = resp.data;
+				_clearPontuacaoInscricaoFilter();
+			}).then(function(inscricaoResp) {
+				for(var ii in self.inscricoesFilter) {
+					self.inscricoesFilter[ii].pontos = countTotalPontosByInscricao(self.inscricoesFilter[ii]);
 				}
-			}
-			self.filter = 'RANCKING_FILTER';
+				_reordenarRanking();
+				self.filter = 'RANCKING_FILTER';
+			}, function(error) {
+				alert(JSON.stringify(error));
+			});
 		}, function(error) {
 			alert(JSON.stringify(error));
 		});

@@ -38,7 +38,7 @@ app.controller('JogoFormController', ['$routeParams', '$location', '$window', 'J
 	}	
 	 
 	self.save = function(jogo) {
-		_save(jogo, '/jogos/'+self.jogo.campeonato.id);
+		_save(jogo, '/apostas_por_jogo/'+self.jogo.id);
 	}
 	
 	self.saveAndAddOther = function(jogo) {

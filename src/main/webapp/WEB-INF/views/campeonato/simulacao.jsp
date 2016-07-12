@@ -57,9 +57,9 @@
 <!-- 		<span class="mui-col-md-1 mui--text-caption mui--text-center">{{ i.acertoVencedorUmResultado }}</span>  -->
 <!-- 		<span class="mui-col-md-1 mui--text-caption mui--text-center">{{ i.acertoVencedor }}</span>  -->
 <!-- 		<span class="mui-col-md-1 mui--text-caption mui--text-center">{{ i.acertoSomenteUmResultado }}</span>  -->
-		<span class="mui-col-md-1 mui--text-caption mui--text-center">{{ i.jogoResultadoA }}</span> 
+		<span class="mui-col-md-1 mui--text-title mui--text-center mui--text-danger">{{ i.jogoResultadoA }}</span> 
 		<span class="mui-col-md-1 mui--text-caption mui--text-center">X</span> 
-		<span class="mui-col-md-1 mui--text-caption mui--text-center">{{ i.jogoResultadoB }}</span> 
+		<span class="mui-col-md-1 mui--text-title mui--text-center mui--text-danger">{{ i.jogoResultadoB }}</span> 
 	  </div>	
 	  
 	  
