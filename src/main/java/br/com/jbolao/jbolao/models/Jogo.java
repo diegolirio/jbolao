@@ -25,6 +25,8 @@ public class Jogo implements Serializable {
 	private int resultadoA;
 	
 	private int resultadoB;
+	
+	private String rodada;
 
 	@Enumerated(EnumType.STRING)
 	@Column(columnDefinition="CHAR(1)", nullable=true)
@@ -101,6 +103,14 @@ public class Jogo implements Serializable {
 
 	public void setCampeonato(Campeonato campeonato) {
 		this.campeonato = campeonato;
+	}
+
+	public String getRodada() {
+		return rodada;
+	}
+
+	public void setRodada(String rodada) {
+		this.rodada = rodada;
 	}
 
 	

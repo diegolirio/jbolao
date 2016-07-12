@@ -254,6 +254,8 @@
 	      	<li><a href="#/"><strong>Home</strong></a></li>
 	      	<li ng-show="campScope"><a href="#/classificacao/{{campScope.id}}"><strong>Classificação</strong></a></li>
 	      	<li ng-show="campScope"><a href="#/jogos/{{campScope.id}}"><strong>Jogos <small>(Tabela)</small></strong></a></li>
+	      	<li ng-show="!usuarioLogged"><a href="#/login"><strong>Login</strong></a></li>
+	      	<li ng-show="usuarioLogged"><a href ng-click="uSessionCtrl.logout()"><strong>Sair</strong></a></li>
 	      </ul>
 	    </div>
 			<header id="header">
@@ -287,17 +289,19 @@
   <script src="${pageContext.request.contextPath}/resources/static/core/app.js"></script>
   <!-- Controllers -->  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/usuario-session-controller-1.0.0.js"></script>  
+  <script src="${pageContext.request.contextPath}/resources/static/core/controllers/login-controller-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/campeonato-dashboard-controller-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/campeonato-form-controller-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/jogo-list-controller-1.0.1.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/jogo-form-controller-1.0.1.js"></script>  
-  <script src="${pageContext.request.contextPath}/resources/static/core/controllers/inscricao-list-controller-1.0.0.js"></script>  
+  <script src="${pageContext.request.contextPath}/resources/static/core/controllers/inscricao-rancking-controller-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/inscricao-form-controller-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/participante-form-controller-1.0.1.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/aposta-list-controller-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/aposta-form-controller-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/simulacao-controller-1.0.0.js"></script>  
 	<!-- Services -->
+  <script src="${pageContext.request.contextPath}/resources/static/core/services/simulador-common-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/services/usuario-session-service-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/services/campeonato-service-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/services/jogo-service-1.0.0.js"></script>  

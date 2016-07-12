@@ -25,7 +25,11 @@
 	    <input ng-model="jfCtrl.jogo.resultadoB">
 	    <label>Resultado B</label>
 	  </div>
-	  
+	  <div class="mui-textfield mui-textfield--float-label" 
+	  	   ng-hide="jfCtrl.jogo.status == 'FINALIZADO'">
+	    <input ng-model="jfCtrl.jogo.rodada">
+	    <label>Rodada</label>
+	  </div>
 	  
 	  <div class="mui-row">
 		 

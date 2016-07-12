@@ -47,6 +47,7 @@ public class JogoService {
 			a.setJogo(jogo);
 			a.setResultadoA(0);
 			a.setResultadoB(0);
+			a.setVencedor(VencedorType.E);
 			this.apostaService.save(a);
 		}
 		return true;
@@ -130,6 +131,10 @@ public class JogoService {
 
 	public int countByCampeonatoAndStatusIn(Campeonato campeonato, Collection<StatusType> statusList) {
 		return this.jogoRepository.countByCampeonatoAndStatusIn(campeonato, statusList);
+	}
+
+	public List<Jogo> findByCampeonatoAndStatus(Campeonato campeonato, StatusType statusType) {
+		return this.jogoRepository.findByCampeonatoAndStatus(campeonato, statusType);
 	}
 
 	

@@ -9,10 +9,11 @@ app.config(['$routeProvider', '$httpProvider',
 	$routeProvider
 	    // public
 		.when('/', { templateUrl: SERVER_APP + '/campeonato/dashboard'})
-		.when('/classificacao/:campeonatoId', { templateUrl: SERVER_APP + '/inscricao/list'})
+		.when('/classificacao/:campeonatoId', { templateUrl: SERVER_APP + '/inscricao/rancking'})
 		.when('/jogos/:campeonatoId',  		  { templateUrl: SERVER_APP + '/jogo/list'})
 		.when('/aposta/:inscricaoId', 	  	  { templateUrl: SERVER_APP + '/aposta/list'})
 		.when('/simulacao/:campeonatoId', 	  { templateUrl: SERVER_APP + '/campeonato/simulacao'})
+		.when('/login', 	  				  { templateUrl: SERVER_APP + '/login'})
 		
 		// private
 		.when('/campeonato/:id', { templateUrl: SERVER_APP + '/campeonato/form'})

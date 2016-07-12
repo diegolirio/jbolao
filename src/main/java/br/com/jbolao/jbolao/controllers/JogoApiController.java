@@ -63,6 +63,17 @@ public class JogoApiController {
 		} 
 	}
 
+	@RequestMapping(value="/findbycampeonatoandstatus/{campeonatoId}/{status}", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
+	public ResponseEntity<String> findByStatus(@PathVariable("campeonatoId") Long campeonatoId, @PathVariable("status") StatusType statusType) {
+		try {
+			List<Jogo> list = this.jogoService.findByCampeonatoAndStatus(new Campeonato(campeonatoId), statusType);
+			return new ResponseEntity<String>(new ObjectMapper().writeValueAsString(list), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		} 
+	}
+
 	@RequestMapping(value="/save", method=RequestMethod.POST, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
 	public ResponseEntity<String> save(@RequestBody Jogo jogo) {
 		

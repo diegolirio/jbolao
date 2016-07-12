@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.jbolao.jbolao.models.Aposta;
+import br.com.jbolao.jbolao.models.Campeonato;
 import br.com.jbolao.jbolao.models.Inscricao;
 import br.com.jbolao.jbolao.models.Jogo;
+import br.com.jbolao.jbolao.models.StatusType;
 import br.com.jbolao.jbolao.models.VencedorType;
 import br.com.jbolao.jbolao.repositories.ApostaRepository;
 
@@ -30,9 +32,8 @@ public class ApostaService {
 	}
 	
 	public Aposta save(Aposta aposta) {
-		boolean newAposta = aposta.getId() != null || !this.apostaRepository.exists(aposta.getId());
-		if(newAposta == false) 
-			aposta.setVencedor(this.getVencedor(aposta));
+		//boolean newAposta = aposta.getId() != null || !this.apostaRepository.exists(aposta.getId());
+		aposta.setVencedor(this.getVencedor(aposta));
 		return this.apostaRepository.save(aposta);
 	}
 
@@ -50,6 +51,14 @@ public class ApostaService {
 
 	public List<Aposta> findByInscricaoAndColocacao(Inscricao inscricao, int colocacao) {
 		return this.apostaRepository.findByInscricaoAndColocacao(inscricao, colocacao);
+	}
+
+	public List<Aposta> findByInscricaoCampeonatoAndJogoStatus(Campeonato campeonato, StatusType statusType) {
+		return this.apostaRepository.findByInscricaoCampeonatoAndJogoStatus(campeonato, statusType);
+	}
+ 
+	public List<Aposta> findByJogoRodadaOrderByInscricaoId(String rodada) {
+		return this.apostaRepository.findByJogoRodadaOrderByInscricaoId(rodada);
 	}
 
 }

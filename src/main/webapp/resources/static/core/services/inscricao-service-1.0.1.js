@@ -9,7 +9,6 @@ app.factory('InscricaoService', ['$http', function($http) {
 	}
 	
 	var _save = function(inscricao) {
-		console.log(inscricao);
 		return $http.post('/jbolao/api/inscricao/save', inscricao);
 	}	
  

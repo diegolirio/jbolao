@@ -8,6 +8,10 @@ app.factory('JogoService', ['$http', function($http) {
 		return $http.get('/jbolao/api/jogo/findone/'+id);
 	}
 	
+	var _findByCampeonatoAndStatus = function(campeonato, status) {
+		return $http.get('/jbolao/api/jogo/findbycampeonatoandstatus/'+campeonato.id+'/'+status);
+	}
+	
 	var _save = function(jogo) {
 		return $http.post('/jbolao/api/jogo/save', jogo);
 	}	
@@ -47,6 +51,8 @@ app.factory('JogoService', ['$http', function($http) {
 		findByCampeonato : _findByCampeonato,
 		
 		findOne : _findOne,
+	
+		findByCampeonatoAndStatus : _findByCampeonatoAndStatus,
 		
 		save : _save,
 

@@ -22,6 +22,8 @@ public interface JogoRepository extends CrudRepository<Jogo, Long> {
 
 	List<Jogo> findByCampeonatoInscricoes(Inscricao inscricao);
 
-	int countByCampeonatoAndStatusIn(Campeonato campeonato, Collection<StatusType> statusList);  
+	int countByCampeonatoAndStatusIn(Campeonato campeonato, Collection<StatusType> statusList);
+
+	List<Jogo> findByCampeonatoAndStatus(Campeonato campeonato, StatusType statusType);  
 
 }
