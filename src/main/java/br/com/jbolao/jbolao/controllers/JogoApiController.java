@@ -143,5 +143,16 @@ public class JogoApiController {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		} 
 	}
+		 
+	@RequestMapping(value="/finddistinctrodadabycampeonato/{campeonatoId}", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
+	public ResponseEntity<String> findDistinctByCampeonato(@PathVariable("campeonatoId") Long campeonatoId) {
+		try {
+			List<String> value = this.jogoService.findDistinctRodadaByCampeonato(new Campeonato(campeonatoId));
+			return new ResponseEntity<String>(new ObjectMapper().writeValueAsString(value), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		} 
+	}
 	
 }

@@ -11,6 +11,10 @@ app.factory('JogoService', ['$http', function($http) {
 	var _findByCampeonatoAndStatus = function(campeonato, status) {
 		return $http.get('/jbolao/api/jogo/findbycampeonatoandstatus/'+campeonato.id+'/'+status);
 	}
+
+	var _findDistinctRodadaByCampeonato = function(campeonato, status) {
+		return $http.get('/jbolao/api/jogo/finddistinctrodadabycampeonato/'+campeonato.id);
+	}
 	
 	var _save = function(jogo) {
 		return $http.post('/jbolao/api/jogo/save', jogo);
@@ -53,9 +57,11 @@ app.factory('JogoService', ['$http', function($http) {
 		findOne : _findOne,
 	
 		findByCampeonatoAndStatus : _findByCampeonatoAndStatus,
+	
+		findDistinctRodadaByCampeonato : _findDistinctRodadaByCampeonato,
 		
 		save : _save,
-
+ 
 		start : _start,
 
 		backToEdit : _backToEdit,

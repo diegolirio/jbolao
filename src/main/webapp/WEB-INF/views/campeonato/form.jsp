@@ -18,10 +18,12 @@
 <!-- 	  <div class="mui-textfield mui-textfield--float-label"> -->
 <!-- 	    <textarea></textarea> -->
 <!-- 	    <label>Observação</label> -->
-<!-- 	  </div> -->
-	  
+<!-- 	  </div> --> 
+	   
 	  <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">Salvar</button>
-	  <a href="#/campeonatos" class="mui-btn mui-btn--raised">Voltar</a>
+	  <a href="{{cfCtrl.previousPage}}" class="mui-btn mui-btn--raised">Voltar</a>
+	  <button type="button" class="mui-btn mui-btn--raised mui-btn--danger"
+	  		  ng-click="cfCtrl.deleteCampeonato(cfCtrl.campeonato)" ng-show="usuarioLogged && cfCtrl.campeonato.id > 0">Excluir</button>
 	</form>
 
 </div>

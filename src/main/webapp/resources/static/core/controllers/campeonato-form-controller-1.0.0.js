@@ -11,6 +11,8 @@ app.controller('CampeonatoFormController', ['$location', '$routeParams', 'Campeo
 				alert(JSON.stringify(error));
 			});
 		}
+		self.previousPage = '#'+$location.search().next;
+		self.nextPage = $location.search().next;
 	}
 	
 	self.save = function(campeonato) {
@@ -18,9 +20,22 @@ app.controller('CampeonatoFormController', ['$location', '$routeParams', 'Campeo
 			self.campeonato = resp.data;
 			alert("Gravado com sucesso!");
 			if($location.search().next)
-				$location.url($location.search().next); 
+				$location.url(self.nextPage); 
 		}, function(error) {
 			alert(JSON.stringify(error.data));
+		});
+	}
+	
+	self.deleteCampeonato = function(campeonato) {
+		if(campeonato.status != 'EDICAO') {
+			alert('Para excluir é preciso que o campeonato esteje com Status Pendente!');
+			return;
+		}
+		CampeonatoService.deleteCampeonato(campeonato).then(function(resp) {
+			alert('Excluido com sucesso');
+			$location.url('/');
+		}, function(error) {
+			alert(JSON.stringify(error));
 		});
 	}
 	

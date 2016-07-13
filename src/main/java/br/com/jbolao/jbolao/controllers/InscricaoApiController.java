@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.jbolao.jbolao.models.Campeonato;
 import br.com.jbolao.jbolao.models.Inscricao;
+import br.com.jbolao.jbolao.models.Participante;
 import br.com.jbolao.jbolao.services.InscricaoService;
 
 @Controller
@@ -49,6 +50,19 @@ public class InscricaoApiController {
 		} 
 	}
 
+	@RequestMapping(value="/findbyparticipante/{participanteId}", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
+	public ResponseEntity<String> findByParticipante(@PathVariable("participanteId") Long participanteId) {
+		try {
+			Participante p = new Participante();
+			p.setId(participanteId);
+			List<Inscricao> list = this.inscricaoService.findByParticipante(p);
+			return new ResponseEntity<String>(new ObjectMapper().writeValueAsString(list), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		} 
+	}
+
 	@RequestMapping(value="/findone/{id}", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	public ResponseEntity<String> findOne(@PathVariable("id") Long id) {
 		try {
@@ -66,6 +80,17 @@ public class InscricaoApiController {
 		try {
 			inscricao = this.inscricaoService.save(inscricao);
 			return new ResponseEntity<String>(new ObjectMapper().writeValueAsString(inscricao), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		} 
+	}
+	
+	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE, produces="application/json; charset=UTF-8")
+	public ResponseEntity<String> delete(@PathVariable("id") Long id) {
+		try {
+			this.inscricaoService.delete(id);
+			return new ResponseEntity<String>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

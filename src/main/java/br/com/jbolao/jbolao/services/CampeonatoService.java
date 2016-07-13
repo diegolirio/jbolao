@@ -44,6 +44,27 @@ public class CampeonatoService {
 	}
 
 	public void delete(Campeonato campeonato) {
+		if(campeonato.getStatus() != StatusType.EDICAO)
+			throw new RuntimeException("Campeonato não está com Status Pendente");
+		//TODO: this.apostaService.deleteByJogoCampeonato(campeonato);
+		List<Aposta> apostas = this.apostaService.findByJogoCampeonato(campeonato);
+		for (Aposta aposta : apostas) {
+			this.apostaService.delete(aposta);
+		}
+		List<Aposta> apostasPorInscr = this.apostaService.findByInscricaoCampeonato(campeonato);
+		for (Aposta aposta : apostasPorInscr) {
+			this.apostaService.delete(aposta);
+		}
+		//TODO:this.inscricaoService.deleteByCampeonato(campeonato);
+		List<Inscricao> inscricoes = this.inscricaoService.findByCampeonatoOrderByColocacao(campeonato);
+		for (Inscricao inscricao : inscricoes) {
+			this.inscricaoService.delete(inscricao);
+		}
+		//TODO:this.jogoService.deleteByCampeonato(campeonato);
+		List<Jogo> jogos = this.jogoService.findByCampeonato(campeonato);
+		for (Jogo jogo : jogos) {
+			this.jogoService.delete(jogo);
+		}
 		this.campeonatoRepository.delete(campeonato);
 	}
 
@@ -220,6 +241,11 @@ public class CampeonatoService {
 		statusListJogo.add(StatusType.EM_ANDAMENTO);
 		statusListJogo.add(StatusType.FINALIZADO);
 		return this.campeonatoRepository.findByStatusAndInscricoesApostasCalculadoAndInscricoesApostasJogoStatusIn(StatusType.EM_ANDAMENTO, false, statusListJogo);
+	}
+
+	public void delete(Long id) {
+		Campeonato campeonato = this.campeonatoRepository.findOne(id);
+		this.delete(campeonato);
 	}
 
 }

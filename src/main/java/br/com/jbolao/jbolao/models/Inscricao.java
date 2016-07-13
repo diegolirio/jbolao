@@ -66,6 +66,10 @@ public class Inscricao {
 	@OneToMany(mappedBy="inscricao")
 	private List<Aposta> apostas;
 	
+	private String codigoEdicaoApostas;
+
+	private boolean ativo = true;
+	
 	public Long getId() {
 		return id;
 	}
@@ -144,6 +148,31 @@ public class Inscricao {
 
 	public void setErrouTudo(int errouTudo) {
 		this.errouTudo = errouTudo;
+	}
+
+	public List<Aposta> getApostas() {
+		return apostas;
+	}
+
+	public void setApostas(List<Aposta> apostas) {
+		this.apostas = apostas;
+	}
+
+	public String getCodigoEdicaoApostas() {
+		return codigoEdicaoApostas;
+	}
+
+	public void setCodigoEdicaoApostas(String codigoEdicaoApostas) {
+		this.codigoEdicaoApostas = codigoEdicaoApostas;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+		
 	}	
 	
 	

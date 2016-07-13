@@ -1,8 +1,8 @@
 /**
  * 
  */
-app.controller('ApostaListController', ['$routeParams', 'InscricaoService', 'ApostaService', 'JogoService',
-                                       function($routeParams, InscricaoService, ApostaService, JogoService) {
+app.controller('ApostaListController', ['$routeParams', '$location', 'InscricaoService', 'ApostaService', 'JogoService',
+                                       function($routeParams, $location, InscricaoService, ApostaService, JogoService) {
 
 	var self = this;
 	
@@ -16,6 +16,23 @@ app.controller('ApostaListController', ['$routeParams', 'InscricaoService', 'Apo
 			}, function(error) {
 				alert(JSON.stringify(error));
 			});
+		}, function(error) {
+			alert(JSON.stringify(error));
+		});
+		self.nextPage = $location.search().next;
+	}
+	
+	self.saveAposta = function(aposta) {
+		ApostaService.save(aposta).then(function(resp) {
+			console.log(resp.data);
+		}, function(error) {
+			alert(JSON.stringify(error));
+		});
+	}
+	
+	self.deleteInscricao = function(inscricao) {
+		InscricaoService.deleteInscricao(inscricao).then(function(resp) {
+			$location.url($location.search().next ? $location.search().next : '/classificacao/'+inscricao.campeonato.id);
 		}, function(error) {
 			alert(JSON.stringify(error));
 		});

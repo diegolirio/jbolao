@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Participante implements Serializable {
@@ -19,6 +20,9 @@ public class Participante implements Serializable {
 	private String email;
 	
 	private String telefone;
+	
+	@ManyToOne
+	private Usuario usuario;
 
 	public Long getId() {
 		return id;
@@ -50,6 +54,14 @@ public class Participante implements Serializable {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 	

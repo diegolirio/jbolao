@@ -2,8 +2,6 @@ package br.com.jbolao.jbolao.repositories;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,23 +14,31 @@ import br.com.jbolao.jbolao.models.StatusType;
 @Repository
 public interface ApostaRepository extends CrudRepository<Aposta, Long> {
 
-	List<Aposta> findByInscricao(Inscricao inscricao);
+	List<Aposta> findByInscricaoAndInscricaoAtivo(Inscricao inscricao, boolean ativo);
 
-	List<Aposta> findByInscricaoCampeonatoInscricoesCampeonatoJogos(Jogo jogo);
+	List<Aposta> findByInscricaoCampeonatoInscricoesCampeonatoJogosAndInscricaoAtivo(Jogo jogo, boolean ativo);
 
-	List<Aposta> findByJogo(Jogo jogo);
+	List<Aposta> findByJogoAndInscricaoAtivo(Jogo jogo, boolean ativo);
 
-	List<Aposta> findByInscricaoAndColocacao(Inscricao inscricao, int colocacao);
+	List<Aposta> findByInscricaoAndColocacaoAndInscricaoAtivo(Inscricao inscricao, int colocacao, boolean ativo);
 
-	List<Aposta> findByInscricaoCampeonatoAndJogoStatus(Campeonato campeonato, StatusType statusType);
+	List<Aposta> findByInscricaoCampeonatoAndJogoStatusAndInscricaoAtivo(Campeonato campeonato, StatusType statusType, boolean ativo);
 	
-	List<Aposta> findByJogoRodadaOrderByInscricaoId(String rodada);
+	List<Aposta> findByJogoRodadaAndInscricaoAtivoOrderByInscricaoId(String rodada, boolean ativo);
 
-	@Modifying
-	@Query("update Aposta a set a.calculado = ?1 where a.jogo = ?2")
-	int setFixedCalculadoFor(Boolean calculado, Jogo jogo);
+	List<Aposta> findByJogoRodadaAndJogoCampeonatoIdAndInscricaoAtivoOrderByInscricaoId(String rodada, Long campeonatoId, boolean ativo);
 
-	List<Aposta> findByJogoRodadaAndJogoCampeonatoIdOrderByInscricaoId(String rodada, Long campeonatoId);
+	void deleteByInscricao(Inscricao inscricao);
+
+	int countByInscricao(Inscricao inscricao);
+
+	void deleteByJogoCampeonato(Campeonato campeonato);
+
+	void deleteByInscricaoId(Long id);
+
+	List<Aposta> findByJogoCampeonato(Campeonato campeonato);
+
+	List<Aposta> findByInscricaoCampeonato(Campeonato campeonato);
 	
 
 }

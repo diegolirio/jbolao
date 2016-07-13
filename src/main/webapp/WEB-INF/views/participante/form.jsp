@@ -14,7 +14,8 @@
 	    <label>E-mail</label>
 	  </div>
 	  	    
-	  <button type="button" ng-click="pfCtrl.saveAndAddNew(pfCtrl.participante)" class="mui-btn mui-btn--raised mui-btn--primary" ng-disabled="formPart.nome.$invalid">Salvar e Adicionar Novo</button>
+	  <button type="button" class="mui-btn mui-btn--raised mui-btn--primary" ng-disabled="formPart.nome.$invalid"
+	          ng-click="pfCtrl.saveAndAddNew(pfCtrl.participante)" ng-hide="pfCtrl.jaInscrito">Salvar e Adicionar Novo</button>
 	  <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary" ng-disabled="formPart.nome.$invalid">Salvar</button>
 	  <a ng-href="{{pfCtrl.previousPage}}"  class="mui-btn mui-btn--raised">Voltar</a>
 	  

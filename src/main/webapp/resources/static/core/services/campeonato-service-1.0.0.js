@@ -20,8 +20,8 @@ app.factory('CampeonatoService', ['$http', function($http) {
 		return $http.put('/jbolao/api/campeonato/backtomodeedit', campeonato);
 	}
 	
-	var _delete = function(campeonato) {
-		return $http.delete('/jbolao/api/campeonato/delete', campeonato);
+	var _deleteCampeonato = function(campeonato) {
+		return $http.delete('/jbolao/api/campeonato/delete/'+campeonato.id);
 	}
 
 	return {
@@ -36,7 +36,7 @@ app.factory('CampeonatoService', ['$http', function($http) {
 
 		voltarPendente : _backToModeEdit,
 
-		delete : _delete
+		deleteCampeonato : _deleteCampeonato
 		
 		
 	}

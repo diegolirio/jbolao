@@ -55,10 +55,10 @@ public class CampeonatoApiController {
 		} 
 	}
 	
-	@RequestMapping(value="/delete", method=RequestMethod.DELETE, consumes="application/json; charset=UTF-8")
-	public ResponseEntity<String> delete(@RequestBody Campeonato campeonato) {
+	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<String> delete(@PathVariable("id") Long id) {
 		try {
-			this.campeonatoService.delete(campeonato);
+			this.campeonatoService.delete(id);
 			return new ResponseEntity<String>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -6,11 +6,19 @@ app.controller('ParticipanteFormController', ['$routeParams', '$location', '$win
 	var self = this;
 
 	self.init = function() {
-		console.log($location.search());
 		self.previousPage = '#'+$location.search().next;
 		if($routeParams.id > 0) {
 			ParticipanteService.findOne($routeParams.id).then(function(resp) {
 				self.participante = resp.data;
+				return resp;
+			}).then(function(participanteResp) {
+				InscricaoService.findByParticipante(self.participante).then(function(resp) {
+					self.inscricaoList = resp.data;
+					console.log(self.inscricaoList);
+					self.jaInscrito = self.inscricaoList != null && self.inscricaoList != undefined && self.inscricaoList.length > 0;
+				}, function(error) {
+					alert(JSON.stringify(error));
+				});
 			}, function(error) {
 				alert(JSON.stringify(error));
 			});
@@ -21,6 +29,7 @@ app.controller('ParticipanteFormController', ['$routeParams', '$location', '$win
 		}, function(error) {
 			alert(JSON.stringify(error));
 		});
+		
 	}
 	
 	var _save = function(participante, nextPage) {
@@ -28,22 +37,30 @@ app.controller('ParticipanteFormController', ['$routeParams', '$location', '$win
 			self.participante = resp.data;
 			return resp;
 		}).then(function(participanteResp) {
-			var inscricao = {};
-			inscricao.participante = participanteResp.data;
-			inscricao.campeonato = self.campeonato;
-			InscricaoService.save(inscricao).then(function(resp) {
-				alert("Gravado e Inscrito com sucesso!");
+			if(!self.jaInscrito) { 
+				var inscricao = {};
+				inscricao.participante = participanteResp.data;
+				inscricao.campeonato = self.campeonato;
+				InscricaoService.save(inscricao).then(function(resp) {
+					alert("Gravado e Inscrito com sucesso!");
+					if(nextPage != null) 
+						$location.url(nextPage);
+					else
+						self.participante = {};
+				}, function(error) {
+					alert(JSON.stringify(error)); 
+				});
+			} else {
+				alert("Alterado com sucesso!");
 				if(nextPage != null) 
 					$location.url(nextPage);
 				else
-					self.participante = {};
-				$window.document.getElementById('idNome').focus();
-			}, function(error) {
-				alert(JSON.stringify(error)); 
-			});				
+					self.participante = {};				
+			}
 		}, function(error) {
 			alert(JSON.stringify(error.data));
-		});		
+		});
+		$window.document.getElementById('idNome').focus();
 	}
 	
 	self.save = function(participante) {

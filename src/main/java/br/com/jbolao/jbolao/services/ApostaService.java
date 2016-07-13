@@ -20,7 +20,7 @@ public class ApostaService {
 	private ApostaRepository apostaRepository;
 
 	public List<Aposta> findByInscricao(Inscricao inscricao) {
-		return this.apostaRepository.findByInscricao(inscricao);
+		return this.apostaRepository.findByInscricaoAndInscricaoAtivo(inscricao, true);
 	}
 
 	public VencedorType getVencedor(Aposta aposta) {
@@ -28,7 +28,7 @@ public class ApostaService {
 			return VencedorType.A;
 		if(aposta.getResultadoA() < aposta.getResultadoB()) 
 			return VencedorType.B;
-		return VencedorType.E;	
+		return VencedorType.E;	 
 	}
 	
 	public Aposta save(Aposta aposta) {
@@ -38,7 +38,7 @@ public class ApostaService {
 	}
 
 	public List<Aposta> findByInscricaoCampeonatoInscricoesCampeonatoJogo(Jogo jogo) {
-		return this.apostaRepository.findByInscricaoCampeonatoInscricoesCampeonatoJogos(jogo);
+		return this.apostaRepository.findByInscricaoCampeonatoInscricoesCampeonatoJogosAndInscricaoAtivo(jogo, true);
 	}
 
 	public Aposta findOne(Long id) {
@@ -46,23 +46,43 @@ public class ApostaService {
 	}
 
 	public List<Aposta> findByJogo(Jogo jogo) {
-		return this.apostaRepository.findByJogo(jogo);
+		return this.apostaRepository.findByJogoAndInscricaoAtivo(jogo, true);
 	}
 
 	public List<Aposta> findByInscricaoAndColocacao(Inscricao inscricao, int colocacao) {
-		return this.apostaRepository.findByInscricaoAndColocacao(inscricao, colocacao);
+		return this.apostaRepository.findByInscricaoAndColocacaoAndInscricaoAtivo(inscricao, colocacao, true);
 	}
 
 	public List<Aposta> findByInscricaoCampeonatoAndJogoStatus(Campeonato campeonato, StatusType statusType) {
-		return this.apostaRepository.findByInscricaoCampeonatoAndJogoStatus(campeonato, statusType);
+		return this.apostaRepository.findByInscricaoCampeonatoAndJogoStatusAndInscricaoAtivo(campeonato, statusType, true);
 	}
  
-	public void setFixedCalculadoFor(boolean calculado, Jogo jogo) {
-		this.apostaRepository.setFixedCalculadoFor(calculado, jogo);
+	public List<Aposta> findByJogoRodadaAndJogoCampeonatoIdOrderByInscricaoId(String rodada, Long campeonatoId) {
+		return this.apostaRepository.findByJogoRodadaAndJogoCampeonatoIdAndInscricaoAtivoOrderByInscricaoId(rodada, campeonatoId, true);
 	}
 
-	public List<Aposta> findByJogoRodadaAndJogoCampeonatoIdOrderByInscricaoId(String rodada, Long campeonatoId) {
-		return this.apostaRepository.findByJogoRodadaAndJogoCampeonatoIdOrderByInscricaoId(rodada, campeonatoId);
+	public int countByInscricao(Inscricao inscricao) {
+		return this.apostaRepository.countByInscricao(inscricao);
+	}
+
+	public void deleteByJogoCampeonato(Campeonato campeonato) {
+		this.apostaRepository.deleteByJogoCampeonato(campeonato);
+	}
+
+	public void deleteByInscricaoId(Long id) {
+		this.apostaRepository.deleteByInscricaoId(id);
+	}
+
+	public void delete(Aposta aposta) {
+		this.apostaRepository.delete(aposta);
+	}
+
+	public List<Aposta> findByJogoCampeonato(Campeonato campeonato) {
+		return this.apostaRepository.findByJogoCampeonato(campeonato);
+	}
+
+	public List<Aposta> findByInscricaoCampeonato(Campeonato campeonato) {
+		return this.apostaRepository.findByInscricaoCampeonato(campeonato);
 	}
 
 }

@@ -41,14 +41,19 @@ app.controller('InscricaoRanckingController', ['$routeParams', '$location', 'Cam
 	}
 	
 	var countTotalPontosByInscricao = function(inscricao) {
-		var pontos = 0;
+		var pontuacao = {"pontos": 0, "AP": 0, "AR": 0, "AV": 0, "AS": 0, "ER": 0};
 		for(var i in self.apostasFilter) {
 			if(inscricao.id == self.apostasFilter[i].inscricao.id) {
-				pontos += self.apostasFilter[i].pontos;
+				pontuacao.pontos += self.apostasFilter[i].pontos;
+				if(self.apostasFilter[i].pontos == 8) pontuacao.AP++;
+				if(self.apostasFilter[i].pontos == 5) pontuacao.AR++;
+				if(self.apostasFilter[i].pontos == 4) pontuacao.AV++;
+				if(self.apostasFilter[i].pontos == 1) pontuacao.AS++;
+				if(self.apostasFilter[i].pontos == 0) pontuacao.ER++;
 			}
 		}
-		console.log(pontos);  
-		return pontos;
+		console.log(pontuacao);  
+		return pontuacao;
 	}
 
 	var _clearPontuacaoInscricaoFilter = function() {
@@ -136,7 +141,14 @@ app.controller('InscricaoRanckingController', ['$routeParams', '$location', 'Cam
 				_clearPontuacaoInscricaoFilter();
 			}).then(function(inscricaoResp) {
 				for(var ii in self.inscricoesFilter) {
-					self.inscricoesFilter[ii].pontos = countTotalPontosByInscricao(self.inscricoesFilter[ii]);
+					var pontuacao = countTotalPontosByInscricao(self.inscricoesFilter[ii]);
+					self.inscricoesFilter[ii].pontos = pontuacao.pontos;
+					self.inscricoesFilter[ii].acertoPlacar = pontuacao.AP;
+					self.inscricoesFilter[ii].acertoVencedorUmResultado = pontuacao.AR;
+					self.inscricoesFilter[ii].acertoVencedor = pontuacao.AV;
+					self.inscricoesFilter[ii].acertoSomenteUmResultado = pontuacao.AS;
+					self.inscricoesFilter[ii].errouTudo = pontuacao.ER;
+					self.inscricoesFilter[ii].jogos = 0;					
 				}
 				_reordenarRanking();
 				self.filter = 'RANCKING_FILTER';
@@ -146,6 +158,25 @@ app.controller('InscricaoRanckingController', ['$routeParams', '$location', 'Cam
 		}, function(error) {
 			alert(JSON.stringify(error));
 		});
+	}
+	
+	self.setFilter = function(value) {
+		self.filter = value;
+		if(value == 'RANCKING_FILTER') {
+			
+		}
+		if(value == 'FILTER') {
+//			if(!self.rodadas) {
+//				JogoService.findDistinctRodadaByCampeonato(self.campeonato).then(function(resp) {
+//					self.rodadas = resp.data;
+//				}, function(resp) {
+//					alert(JSON.stringify(resp));
+//				});
+//			}
+		}
+		if(value == 'CLEAR') {
+			
+		}
 	}
 	
 	self.init();
