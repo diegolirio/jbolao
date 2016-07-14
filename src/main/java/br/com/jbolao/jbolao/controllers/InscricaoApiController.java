@@ -2,6 +2,8 @@ package br.com.jbolao.jbolao.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import br.com.jbolao.jbolao.common.HttpCommon;
 import br.com.jbolao.jbolao.models.Campeonato;
 import br.com.jbolao.jbolao.models.Inscricao;
 import br.com.jbolao.jbolao.models.Participante;
+import br.com.jbolao.jbolao.services.CampeonatoService;
 import br.com.jbolao.jbolao.services.InscricaoService;
 
 @Controller
@@ -23,6 +27,8 @@ public class InscricaoApiController {
 
 	@Autowired
 	private InscricaoService inscricaoService;
+	@Autowired
+	private CampeonatoService campeonatoService;
 
 	
 	@RequestMapping(value="/findbycampeonato", method=RequestMethod.GET, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
@@ -73,6 +79,17 @@ public class InscricaoApiController {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		} 
 	}
+	
+	@RequestMapping(value="/findbyidandcodigoedicaoapostas/{id}/{codigoEdicaoApostas}", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
+	public ResponseEntity<String> findByIdAndCodigoEdicaoApostas(@PathVariable("id") Long id, @PathVariable("codigoEdicaoApostas") String codigoEdicaoApostas) {
+		try {
+			Inscricao inscricao = this.inscricaoService.findByIdAndCodigoEdicaoApostas(id, codigoEdicaoApostas);
+			return new ResponseEntity<String>(new ObjectMapper().writeValueAsString(inscricao), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		} 
+	}
 
 	@RequestMapping(value="/save", method=RequestMethod.POST, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
 	public ResponseEntity<String> save(@RequestBody Inscricao inscricao) {
@@ -97,5 +114,28 @@ public class InscricaoApiController {
 		} 
 	}
 
-	
+	@RequestMapping(value="/finalizeedicaoaposta/{id}", method=RequestMethod.PUT, produces="application/json; charset=UTF-8")
+	public ResponseEntity<String> finalizeEdicaoAposta(@PathVariable("id") Long id) {
+		try {
+			Inscricao inscricao = this.inscricaoService.findOne(id);
+			inscricao = this.inscricaoService.finalizeEdicaoAposta(inscricao);
+			return new ResponseEntity<String>(new ObjectMapper().writeValueAsString(inscricao), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		} 
+	}
+
+	@RequestMapping(value="/sendemailapostasforparticipantes/{id}", produces="application/json")
+	public ResponseEntity<String> sendEmailApostasForParticipantes(@PathVariable("id") Long id, HttpServletRequest request) {
+		try {
+			Campeonato campeonato = this.campeonatoService.findOne(id);
+			String serverURL = HttpCommon.getURLServer(request);
+			this.inscricaoService.sendEmailApostasForParticipantes(campeonato, serverURL);
+			return new ResponseEntity<String>(HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		} 
+	}	
 }

@@ -20,6 +20,10 @@ app.factory('CampeonatoService', ['$http', function($http) {
 		return $http.put('/jbolao/api/campeonato/backtomodeedit', campeonato);
 	}
 	
+	var _sendEmailRancking = function(campeonato) {
+		return $http.put('/jbolao/api/campeonato/sendmailrancking/'+campeonato.id);
+	}
+	
 	var _deleteCampeonato = function(campeonato) {
 		return $http.delete('/jbolao/api/campeonato/delete/'+campeonato.id);
 	}
@@ -35,7 +39,9 @@ app.factory('CampeonatoService', ['$http', function($http) {
 		iniciar : _start,
 
 		voltarPendente : _backToModeEdit,
-
+	
+		sendEmailRancking : _sendEmailRancking,
+		
 		deleteCampeonato : _deleteCampeonato
 		
 		

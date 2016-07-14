@@ -7,8 +7,28 @@
 			  <h1>
 			  	{{irCtrl.campeonato.nome}} 
 			  	<small class="mui--text-subhead">( {{irCtrl.campeonato.descricao}} )</small>
+			  	
+			  	<button class="mui-btn mui-btn--small mui-btn--danger" 
+			  			ng-click="irCtrl.iniciar(irCtrl.campeonato)"
+			  			ng-show="usuarioLogged && irCtrl.campeonato.status == 'EDICAO'">Iniciar</button>
+			  	
+			  	<button class="mui-btn mui-btn--small mui-btn--danger" 
+			  			ng-click="irCtrl.voltarPendente(irCtrl.campeonato)"
+			  			ng-show="usuarioLogged && irCtrl.campeonato.status == 'EM_ANDAMENTO'">Voltar para Pendente</button>			  	
+			  	
+			  	<button class="mui-btn mui-btn--small" 
+			  			ng-click="irCtrl.sendEmailApostasForParticipantes(irCtrl.campeonato)"
+			  			ng-show="usuarioLogged && (irCtrl.campeonato.status == 'EDICAO' || irCtrl.campeonato.alteraApostaAntesJogo == true)">
+			  				Enviar Formulário de Apostas para Participantes
+			  	</button>			  	
+			  	<button class="mui-btn mui-btn--small" 
+			  			ng-click="irCtrl.sendEmailRancking(irCtrl.campeonato)"
+			  			ng-show="usuarioLogged && (irCtrl.campeonato.status == 'EM_ANDAMENTO')">
+			  				Enviar Email do Rancking
+			  	</button>			  	
 			  </h1>
 			  <hr/>	
+			  
 			  
 			  <div class="mui-col-md-7">
 				  <h3 class="mui--text-danger">
@@ -40,11 +60,11 @@
 			  </div>	
 			  <a href="#/aposta/{{i.id}}" ng-repeat="i in irCtrl.inscricoes" title="{{i.participante.nome}} - Inscrição: {{i.id}}">	
 				  <div class="mui-panel mui-col-md-12">  
-					<span class="mui-col-md-1 mui--text-headline mui--text-center">{{ i.colocacao > 0 ? i.colocacao : $index+1}}º</span> 
+					<span class="mui-col-md-1 mui--text-subhead mui--text-center"><b>{{ i.colocacao > 0 ? i.colocacao : $index+1}}º</b></span> 
 					<span class="mui-col-md-3 mui--text-title ">{{i.participante.nome}} </span> 
 <!-- 					<span class="mui-col-md-1 mui--text-caption mui--text-center mui--text-dark">{{ i.id }}</span>  -->
-					<span class="mui-col-md-1 mui--text-headline mui--text-center">{{ i.pontos }}</span> 
-					<span class="mui-col-md-1 mui--text-headline mui--text-center">{{ irCtrl.countJogos }}</span> 
+					<span class="mui-col-md-1 mui--text-headline mui--text-center"><b>{{ i.pontos }}</b></span> 
+					<span class="mui-col-md-1 mui--text-subhead mui--text-center">{{ irCtrl.countJogos }}</span> 
 					<span class="mui-col-md-1 mui--text-caption mui--text-center">{{ i.acertoPlacar }}</span> 
 					<span class="mui-col-md-1 mui--text-caption mui--text-center">{{ i.acertoVencedorUmResultado }}</span> 
 					<span class="mui-col-md-1 mui--text-caption mui--text-center">{{ i.acertoVencedor }}</span> 

@@ -5,12 +5,6 @@
 	  <h1>
 	  	{{jCtrl.campeonato.nome}} 
 	  	<small class="mui--text-subhead">( {{jCtrl.campeonato.descricao}} )</small>
-	  	<button class="mui-btn mui-btn--small mui-btn--danger" 
-	  			ng-click="jCtrl.iniciar(jCtrl.campeonato)"
-	  			ng-show="usuarioLogged && jCtrl.campeonato.status == 'EDICAO'">Iniciar</button>
-	  	<button class="mui-btn mui-btn--small mui-btn--danger" 
-	  			ng-click="jCtrl.voltarPendente(jCtrl.campeonato)"
-	  			ng-show="usuarioLogged && jCtrl.campeonato.status == 'EM_ANDAMENTO'">Voltar para Pendente</button>
 	  </h1>
 	  <hr/>	
 	  

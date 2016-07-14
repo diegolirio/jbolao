@@ -84,6 +84,14 @@ app.controller('JogoFormController', ['$routeParams', '$location', '$window', 'J
 	self.getStatusDescription = function(status) {
 		return JogoService.getStatusDescription(status);
 	}
+
+	self.deleteJogo = function(jogo) {
+		JogoService.deleteJogo(jogo).then(function(resp) {
+			$location.url("/jogos/"+jogo.campeonato.id);
+		}, function(error) {
+			alert(JSON.stringify(error));
+		});
+	}
 	
 	self.init();
 	

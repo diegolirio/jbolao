@@ -301,6 +301,7 @@
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/aposta-list-controller-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/apostas-jogo-controller-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/aposta-form-controller-1.0.0.js"></script>  
+  <script src="${pageContext.request.contextPath}/resources/static/core/controllers/aposta-myedit-controller-1.0.0.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/static/core/controllers/simulacao-controller-1.0.0.js"></script>  
 	<!-- Services -->
   <script src="${pageContext.request.contextPath}/resources/static/core/services/simulador-common-1.0.0.js"></script>  

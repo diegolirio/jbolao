@@ -46,8 +46,8 @@ app.factory('JogoService', ['$http', function($http) {
 		return $http.get('/jbolao/api/jogo/countjogosemandamentofinalizado/'+campeonato.id);
 	}
 	
-	var _delete = function(jogo) {
-		return $http.delete('/jbolao/api/jogo/delete', jogo);
+	var _deleteJogo = function(jogo) {
+		return $http.delete('/jbolao/api/jogo/delete/'+jogo.id);
 	}
 	
 	return {
@@ -74,7 +74,7 @@ app.factory('JogoService', ['$http', function($http) {
 	
 		countByCampeonatoAndamentoAndFinalizado : _countByCampeonatoAndamentoAndFinalizado,
 		
-		delete : _delete
+		deleteJogo : _deleteJogo
 		
 	}
 	

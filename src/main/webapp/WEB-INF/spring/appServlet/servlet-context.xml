@@ -26,16 +26,56 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="br.com.jbolao.jbolao.controllers" />
+	<context:component-scan base-package="br.com.jbolao.jbolao.mail" />
 	<context:component-scan base-package="br.com.jbolao.jbolao.services" />
 	<context:component-scan base-package="br.com.jbolao.jbolao.repositories" />
 	
 	<!-- ********** Configuration Datasource Connection *********************************** --> 
-	<beans:bean id="dataSourceDB" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <beans:property name="driverClassName" value="com.mysql.jdbc.Driver" /> 
-        <beans:property name="url" value="jdbc:mysql://localhost:3306/jbolao?autoReconnect=true" />
-        <beans:property name="username" value="root" /> 
-        <beans:property name="password" value="root" />  
-    </beans:bean>
+<!-- 	<beans:bean id="dataSourceDB" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+<!--         <beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />  -->
+<!--         <beans:property name="url" value="jdbc:mysql://localhost:3306/jbolao?autoReconnect=true" /> -->
+<!--         <beans:property name="username" value="root" />  -->
+<!--         <beans:property name="password" value="root" />   -->
+<!--     </beans:bean> -->
+
+	<beans:bean class="java.lang.String" id="dbHost">
+		<beans:constructor-arg
+			value="#{ systemEnvironment['OPENSHIFT_MYSQL_DB_HOST'] == null ? 'localhost' : systemEnvironment['OPENSHIFT_MYSQL_DB_HOST'] }" />
+	</beans:bean>
+	<beans:bean class="java.lang.String" id="dbPort">
+		<beans:constructor-arg
+			value="#{ systemEnvironment['OPENSHIFT_MYSQL_DB_PORT'] == null ? '3306' : systemEnvironment['OPENSHIFT_MYSQL_DB_PORT'] }" />
+	</beans:bean>
+	<beans:bean class="java.lang.String" id="dbUser">
+		<beans:constructor-arg
+			value="#{ systemEnvironment['OPENSHIFT_MYSQL_DB_HOST'] == null ? 'root' : 'admin7hnIg7j' }" />
+	</beans:bean>
+	<beans:bean class="java.lang.String" id="dbPass">
+		<beans:constructor-arg
+			value="#{ systemEnvironment['OPENSHIFT_MYSQL_DB_HOST'] == null ? 'root' : 'Q6H-2NSPHYhx' }" />
+	</beans:bean>
+	<beans:bean class="java.lang.String" id="dbName">
+		<beans:constructor-arg
+			value="#{ systemEnvironment['OPENSHIFT_MYSQL_DB_HOST'] == null ? 'jbolao' : 'jbolao' }" />
+	</beans:bean>
+	<beans:bean class="java.lang.String" id="database">
+		<beans:constructor-arg
+			value="#{ systemEnvironment['OPENSHIFT_MYSQL_DB_HOST'] == null ? 'mysql' : 'mysql' }" />
+	</beans:bean>
+	<beans:bean class="java.lang.String" id="dbDrive">
+		<beans:constructor-arg
+			value="#{ systemEnvironment['OPENSHIFT_MYSQL_DB_HOST'] == null ? 'com.mysql.jdbc.Driver' : 'com.mysql.jdbc.Driver' }" />
+	</beans:bean>
+
+	<!-- ********** Configuration Datasource Connection *********************************** -->
+	<beans:bean id="dataSourceDB"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<beans:property name="driverClassName" value="#{@dbDrive}" />
+		<beans:property name="url"
+			value="jdbc:#{@database}://#{@dbHost}:#{@dbPort}/#{@dbName}" />
+		<beans:property name="username" value="#{@dbUser}" />
+		<beans:property name="password" value="#{@dbPass}" />
+	</beans:bean>
 	
 	<beans:bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -56,5 +96,23 @@
 					  entity-manager-factory-ref="entityManagerFactory"
 					  transaction-manager-ref="transactionManager" />
 	
+
+	<!-- Mail service -->
+	<beans:bean id="tdvmail" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	    <beans:property name="host" value="smtp.dellavolpe.com.br"/>
+	    <beans:property name="port" value="25"/>
+	    <beans:property name="username" value="postmaster@dellavolpe.com.br"/>
+	    <beans:property name="password" value="uusmor64"/>
+	    <beans:property name="javaMailProperties">
+	        <beans:props>
+	            <!-- Use SMTP-AUTH to authenticate to SMTP server -->
+	            <beans:prop key="mail.smtp.auth">true</beans:prop>
+	            <!-- Use TLS to encrypt communication with SMTP server -->
+	            <beans:prop key="mail.smtp.starttls.enable">false</beans:prop>
+				<!-- Debug -->
+	            <beans:prop key="mail.debug">true</beans:prop>
+	        </beans:props>
+	    </beans:property>
+	</beans:bean>	
 	
 </beans:beans>

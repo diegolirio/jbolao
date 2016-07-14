@@ -50,7 +50,7 @@
 		<span class="mui-col-md-1 mui--text-subhead mui--text-center">{{ i.colocacao > 0 ? i.colocacao : $index+1}}º</span> 
 		<span class="mui-col-md-2 mui--text-subhead ">{{i.participante.nome}}</span> 
 		<span class="mui-col-md-1 mui--text-subhead mui--text-center">
-			{{ i.pontos }} 
+			<b>{{ i.pontos }}</b> 
 			<span class="mui--text-accent-hint">{{ '+'+(i.pontosSomados) }}</span> </span> 
 		<span class="mui-col-md-1 mui--text-subhead mui--text-center">{{ siCtrl.countJogos }}</span> 
 <!-- 		<span class="mui-col-md-1 mui--text-caption mui--text-center">{{ i.acertoPlacar }}</span>  -->

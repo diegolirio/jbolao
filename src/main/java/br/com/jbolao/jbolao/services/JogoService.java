@@ -151,9 +151,20 @@ public class JogoService {
 	public void deleteByCampeonato(Campeonato campeonato) {
 		this.jogoRepository.deleteByCampeonato(campeonato);
 	}
-
+	
 	public void delete(Jogo jogo) {
+		if(jogo.getStatus() != StatusType.EDICAO)
+			throw new RuntimeException("Jogo não está com Status Pendente");
+		List<Aposta> apostas = this.apostaService.findByJogo(jogo);
+		for (Aposta aposta : apostas) {
+			this.apostaService.delete(aposta);
+		}		
 		this.jogoRepository.delete(jogo);
+	}
+
+	public void delete(Long id) {
+		Jogo jogo = this.findOne(id);
+		this.delete(jogo);
 	}
 	
 }

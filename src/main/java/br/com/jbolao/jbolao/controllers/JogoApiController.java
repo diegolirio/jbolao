@@ -86,6 +86,17 @@ public class JogoApiController {
 		} 
 	}
 
+	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<String> delete(@PathVariable("id") Long id) {
+		try {
+			this.jogoService.delete(id);
+			return new ResponseEntity<String>(HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		} 
+	}
+
 	@RequestMapping(value="/start", method=RequestMethod.PUT, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
 	public ResponseEntity<String> start(@RequestBody Jogo jogo) {
 		try {

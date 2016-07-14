@@ -39,6 +39,9 @@
 		  <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary" 
 		  		  ng-disabled="formJogo.timeA.$invalid || formJogo.timeB.$invalid">Salvar</button>
 		  
+		  <button type="button" class="mui-btn mui-btn--raised mui-btn--danger" 
+		  		  ng-click="jfCtrl.deleteJogo(jfCtrl.jogo)" ng-show="jfCtrl.jogo.id > 0">Excluir</button>
+		  
 		  <a ng-href="#/jogos/{{jfCtrl.jogo.campeonato.id}}" class="mui-btn mui-btn--raised">Voltar</a>
 		  
 		  <a class="mui-btn mui-btn--raised mui-btn--danger" ng-click="jfCtrl.start(jfCtrl.jogo)" 

@@ -32,6 +32,47 @@ app.controller('InscricaoRanckingController', ['$routeParams', '$location', 'Cam
 		
 	}
 	
+	self.iniciar = function(campeonato) {
+		CampeonatoService.iniciar(campeonato).then(function(resp) {
+			self.campeonato = resp.data;
+		}, function(error) {
+			alert(JSON.stringify(error));
+		});
+	}
+
+	/**
+	 * Voltar para pendente
+	 */
+	self.voltarPendente = function(campeonato) {
+		CampeonatoService.voltarPendente(campeonato).then(function(resp) {
+			self.campeonato = resp.data;
+		}, function(error) {
+			alert(JSON.stringify(error));
+		});
+	}	
+
+	/**
+	 * Envia Formulario de Aposta para Participante
+	 */
+	self.sendEmailApostasForParticipantes = function(campeonato) {
+		InscricaoService.sendEmailApostasForParticipantes(campeonato).then(function(resp) {
+			alert('Email Enviado');
+		}, function(error) {
+			alert(JSON.stringify(error));
+		});
+	}	
+	
+	/**
+	 * Envia Email Rancking
+	 */
+	self.sendEmailRancking = function(campeonato) {
+		CampeonatoService.sendEmailRancking(campeonato).then(function(resp) {
+			alert('Email Enviado');
+		}, function(error) {
+			alert(JSON.stringify(error));
+		});
+	}	
+	
 	self.calcPercent = function(inscricao) {
 		//<!-- TOTAL_JOGOS = todos os jogos daquele campeonato onde Status != EDICAO  --> 
 		//<!-- Calculo = TOTAL_JOGOS * PONTO_MAXIMO_8 * 100 / pontos_participante  -->

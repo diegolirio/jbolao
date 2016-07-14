@@ -3,8 +3,11 @@ package br.com.jbolao.jbolao.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(uniqueConstraints=@UniqueConstraint(columnNames={"email"}))
 public class Usuario {
 
 	@Id @GeneratedValue

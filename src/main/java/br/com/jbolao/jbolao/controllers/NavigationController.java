@@ -52,6 +52,11 @@ public class NavigationController {
 	public String apostaForm() {
 		return "aposta/form"; 
 	}
+
+	@RequestMapping(value="/aposta/myedit")
+	public String apostaMyEdit() {
+		return "aposta/myedit"; 
+	}
 	
 
 	@RequestMapping(value="inscricao/rancking")

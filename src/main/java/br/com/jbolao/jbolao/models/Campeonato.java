@@ -10,10 +10,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
+@Table(uniqueConstraints=@UniqueConstraint(columnNames={"nome", "descricao"}))
 public class Campeonato implements Serializable {
 
 	private static final long serialVersionUID = 1L;

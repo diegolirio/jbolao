@@ -16,7 +16,9 @@ app.config(['$routeProvider', '$httpProvider',
 		.when('/apostas_por_jogo/:jogoId',    { templateUrl: SERVER_APP + '/aposta/listbyjogo'})
 		.when('/regras', 	  				  { templateUrl: SERVER_APP + '/regras'})
 		.when('/login', 	  				  { templateUrl: SERVER_APP + '/login'})
-		
+		// editar aposta pagina publica
+		.when('/minhas/apostas/:inscricaoId/:codigoEdicaoApostas',{ templateUrl: SERVER_APP + '/aposta/myedit'})
+
 		// private
 		.when('/campeonato/:id', { templateUrl: SERVER_APP + '/campeonato/form'})
 		.when('/jogo/:id/campeonato/:campeonatoId',  { templateUrl: SERVER_APP + '/jogo/form'})

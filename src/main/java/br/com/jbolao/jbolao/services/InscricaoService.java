@@ -1,10 +1,14 @@
 package br.com.jbolao.jbolao.services;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import br.com.jbolao.jbolao.common.SettingsMail;
+import br.com.jbolao.jbolao.mail.Mail;
 import br.com.jbolao.jbolao.models.Aposta;
 import br.com.jbolao.jbolao.models.Campeonato;
 import br.com.jbolao.jbolao.models.Inscricao;
@@ -24,6 +28,9 @@ public class InscricaoService {
 
 	@Autowired
 	private ApostaService apostaService;
+
+	@Autowired
+	private Mail mail;
 
 	public List<Inscricao> findByCampeonatoOrderByColocacao(Campeonato campeonato) {
 		return this.inscricaoRepository.findByCampeonatoAndAtivoOrderByColocacao(campeonato, true);
@@ -56,6 +63,7 @@ public class InscricaoService {
 				this.apostaService.save(a);
 			}
 		}
+		inscricao = this.inscricaoRepository.save(inscricao);
 		return inscricao;
 	}
 
@@ -95,6 +103,47 @@ public class InscricaoService {
 
 	public void deleteByCampeonato(Campeonato campeonato) {
 		this.inscricaoRepository.deleteByCampeonato(campeonato);
+	}
+
+	public boolean sendEmailApostasForParticipante(Inscricao inscricao, String serverURL) {
+		inscricao.setCodigoEdicaoApostas(String.valueOf(new Random().nextInt(999999999)));
+		String url = serverURL + "/jbolao/#/minhas/apostas/"+inscricao.getId()+"/"+inscricao.getCodigoEdicaoApostas();
+		try {
+			String html = "<h1>Segue formulário para Editar suas apostas</h1><h4>"+inscricao.getParticipante().getNome()+"</h4><a href='"+url+"'>"+url+"</a>";
+			boolean sendMail = this.mail.sendMailHtml("Apostas", html , SettingsMail.FROM, inscricao.getParticipante().getEmail(), SettingsMail.CC);
+			this.save(inscricao);
+			return sendMail;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public boolean sendEmailApostasForParticipantes(Campeonato campeonato, String serverURL) {
+		List<Inscricao> inscricoes = this.findByCampeonatoOrderByColocacao(campeonato);
+		String messageError = null; 
+		for (Inscricao inscricao : inscricoes) {
+			try {
+				if(StringUtils.isEmpty(inscricao.getParticipante().getEmail()) == false && this.sendEmailApostasForParticipante(inscricao, serverURL) == false) 
+					messageError += "\nErro ao Enviar Email para Participante: " + inscricao.getParticipante().getEmail();
+			} catch(Exception e) {
+				messageError += "\nErro ao Enviar Email para Participante: " + inscricao.getParticipante().getEmail();
+			}
+		}
+		if(messageError != null)
+			// TODO: return message error
+			System.out.println(messageError);
+		return true;
+	}
+
+	public Inscricao findByIdAndCodigoEdicaoApostas(Long id, String codigoEdicaoApostas) {
+		return this.inscricaoRepository.findByIdAndCodigoEdicaoApostasAndAtivo(id, codigoEdicaoApostas, true);
+	}
+
+	public Inscricao finalizeEdicaoAposta(Inscricao inscricao) {
+		inscricao.setCodigoEdicaoApostas(null);
+		inscricao = this.save(inscricao);
+		return inscricao;
 	}
 
 }

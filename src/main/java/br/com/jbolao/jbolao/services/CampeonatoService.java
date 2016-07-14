@@ -6,8 +6,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import br.com.jbolao.jbolao.common.RegrasCommon;
+import br.com.jbolao.jbolao.common.SettingsMail;
+import br.com.jbolao.jbolao.mail.Mail;
 import br.com.jbolao.jbolao.models.Aposta;
 import br.com.jbolao.jbolao.models.Campeonato;
 import br.com.jbolao.jbolao.models.Inscricao;
@@ -30,6 +33,9 @@ public class CampeonatoService {
 
 	@Autowired
 	private InscricaoService inscricaoService;
+
+	@Autowired
+	private Mail mail;
 
 	public List<Campeonato> findAll() {
 		return (List<Campeonato>) this.campeonatoRepository.findAll();
@@ -76,6 +82,10 @@ public class CampeonatoService {
 			throw new RuntimeException("Não há Jogo para este campeonato");
 		campeonato.setStatus(StatusType.EM_ANDAMENTO);
 		campeonato = this.save(campeonato);
+		List<Inscricao> inscricoes = this.inscricaoService.findByCampeonatoOrderByColocacao(campeonato);
+		for (Inscricao inscricao : inscricoes) {
+			this.inscricaoService.finalizeEdicaoAposta(inscricao);
+		}
 		return campeonato;
 	}
 
@@ -246,6 +256,28 @@ public class CampeonatoService {
 	public void delete(Long id) {
 		Campeonato campeonato = this.campeonatoRepository.findOne(id);
 		this.delete(campeonato);
+	}
+
+	public boolean sendMailRancking(Long id, String serverURL) {
+		List<Inscricao> inscricoes = this.inscricaoService.findByCampeonatoOrderByColocacao(this.findOne(id));
+		List<String> cc = new ArrayList<>();
+		for (Inscricao i : inscricoes) {
+			if(StringUtils.isEmpty(i.getParticipante().getEmail()) == false) cc.add(i.getParticipante().getEmail());
+		}
+		if(cc.size() <= 0) 
+			return true;
+		try {
+			String [] arrayEmailCC = new String[cc.size()];
+			for (int i = 0; i <= cc.size()-1; i++) {
+				arrayEmailCC[i] = cc.get(i);
+			}
+			String url = serverURL+"/jbolao/#/classificacao/"+id;
+			this.mail.sendMailHtml("Rancking", "<h1>Segue Link do Rancking</h1><a href='"+url +"'>"+url+"</a>", SettingsMail.FROM, arrayEmailCC[0], arrayEmailCC);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		}
+		return true;
 	}
 
 }
