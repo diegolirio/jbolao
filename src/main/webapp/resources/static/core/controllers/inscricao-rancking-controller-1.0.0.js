@@ -85,6 +85,7 @@ app.controller('InscricaoRanckingController', ['$routeParams', '$location', 'Cam
 		var pontuacao = {"pontos": 0, "AP": 0, "AR": 0, "AV": 0, "AS": 0, "ER": 0};
 		for(var i in self.apostasFilter) {
 			if(inscricao.id == self.apostasFilter[i].inscricao.id) {
+				console.log(self.apostasFilter[i].pontos);
 				pontuacao.pontos += self.apostasFilter[i].pontos;
 				if(self.apostasFilter[i].pontos == 8) pontuacao.AP++;
 				if(self.apostasFilter[i].pontos == 5) pontuacao.AR++;
@@ -93,6 +94,7 @@ app.controller('InscricaoRanckingController', ['$routeParams', '$location', 'Cam
 				if(self.apostasFilter[i].pontos == 0) pontuacao.ER++;
 			}
 		}
+		console.log(pontuacao);
 		return pontuacao;
 	}
 

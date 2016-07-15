@@ -28,7 +28,7 @@ app.controller('JogoFormController', ['$routeParams', '$location', '$window', 'J
 			self.jogo = resp.data;
 			alert("Gravado com sucesso!");
 			if(nextPage) 
-				$location.url(nextPage);
+				$location.url(nextPage+self.jogo.id);
 			else 
 				self.clearJogo();
 			 $window.document.getElementById('idTimeA').focus();
@@ -38,7 +38,7 @@ app.controller('JogoFormController', ['$routeParams', '$location', '$window', 'J
 	}	
 	 
 	self.save = function(jogo) {
-		_save(jogo, '/apostas_por_jogo/'+self.jogo.id);
+		_save(jogo, '/apostas_por_jogo/');
 	}
 	
 	self.saveAndAddOther = function(jogo) {

@@ -247,7 +247,11 @@
   </head>
   <body ng-controller="UsuarioSessionController as uSessionCtrl">
 	    <div id="sidedrawer" class="mui--no-user-select">
-	      <div id="sidedrawer-brand" class="mui--appbar-line-height"><a href="${pageContext.request.contextPath}">Bolão</a></div>
+	      <div id="sidedrawer-brand" class="mui--appbar-line-height">
+	      	<a href="${pageContext.request.contextPath}">
+	      		<img alt="" src="${pageContext.request.contextPath}/resources/static/img/bola_grama.gif" height="77" width="77" class="img-responsive" />
+		  	</a>
+		  </div>
 	      <div class="mui-divider"></div> 
 	      <ul>
 	      	<!-- public -->

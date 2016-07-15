@@ -13,6 +13,9 @@ app.controller('ApostaListController', ['$routeParams', '$location', 'InscricaoS
 		}).then(function(respInscricao) {
 			ApostaService.findByInscricao(respInscricao.data).then(function(resp) {
 				self.apostas = resp.data;
+				for(var i =0; i <= self.apostas.length-1; i++) {
+					self.btnConcluir = true; break;
+				}	
 			}, function(error) {
 				alert(JSON.stringify(error));
 			});

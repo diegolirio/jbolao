@@ -13,7 +13,7 @@ app.controller('ApostaMyEditController', ['$routeParams', '$location', 'Inscrica
 		}).then(function(respInscricao) {
 			if(self.inscricao == null || self.inscricao.campeonato.status != 'EDICAO') {
 				alert("O Formulario de Edicao de Aposta encontra-se indisponivel, segue abaixo os possiveis motivos: \n\n-Sua aposta foi concluida. \n-Foi esgotado o prazo para Editar suas apostas. \n-Link pode ter sido desativado por motivos administrativos");
-				$location.url("/");
+				$location.url("/aposta/"+$routeParams.inscricaoId);
 				return;
 			}
 			ApostaService.findByInscricao(respInscricao.data).then(function(resp) {

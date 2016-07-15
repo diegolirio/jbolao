@@ -10,7 +10,7 @@
 	  
 	  <div class="mui-col-md-8">
 		  <h3>
-		  	Aposta: {{ameCtrl.inscricao.participante.nome}} <span class="mui--text-danger">(Página exclusiva do Usuário)</span>
+		  	Aposta: <span class="mui--text-danger">Página exclusiva de {{ameCtrl.inscricao.participante.nome}}</span>
 		  </h3>
 	  </div>
 	  <div class="mui-col-md-4 mui--text-right">
@@ -46,7 +46,7 @@
 				<span ng-show="a.jogo.status != 'EDICAO'" class="mui--text-subhead mui--text-accent mui--text-center">+{{ a.pontos }}</span>
 			</span>
 		</div>
-	  </div>
+	  </div> 
 	  <div class="mui-col-md-12 mui--text-right">
 	  	<button type="button" class="mui-btn mui-btn--primary" ng-click="ameCtrl.concluirAposta(ameCtrl.inscricao)">Concluir</button>
 	  </div>	

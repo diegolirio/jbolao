@@ -86,7 +86,7 @@ public class ApostaService {
 	}
 
 	public List<Aposta> findByJogoRodadaInAndJogoCampeonatoIdOrderByInscricaoId(List<String> rodadas, Long campeonatoId) {
-		return this.apostaRepository.findByJogoRodadaInAndJogoCampeonatoIdOrderByInscricaoId(rodadas, campeonatoId);
+		return this.apostaRepository.findByJogoRodadaInAndJogoCampeonatoIdAndCalculadoOrderByInscricaoId(rodadas, campeonatoId, true);
 	}
 
 }

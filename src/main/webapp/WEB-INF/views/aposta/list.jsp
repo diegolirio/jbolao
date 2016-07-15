@@ -54,4 +54,7 @@
 			</span>
 		</div>
 	  </div>	
+	  <div class="mui-col-md-12 mui--text-right"  ng-show="usuarioLogged  && usuarioLogged.id == 1 && alCtrl.btnConcluir">
+	  	<button type="button" class="mui-btn mui-btn--primary" onclick="alert('Concluido com sucesso'); window.location.reload();">Concluir</button>
+	  </div>		  
 </div>
