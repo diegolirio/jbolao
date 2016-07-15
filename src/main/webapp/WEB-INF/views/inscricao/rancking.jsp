@@ -62,7 +62,9 @@
 			  <a href="#/aposta/{{i.id}}" ng-repeat="i in irCtrl.inscricoes" title="{{i.participante.nome}} - Inscrição: {{i.id}}">	
 				  <div class="mui-panel mui-col-md-12">  
 					<span class="mui-col-md-1 mui--text-subhead mui--text-center"><b>{{ i.colocacao > 0 ? i.colocacao : $index+1}}º</b></span> 
-					<span class="mui-col-md-3 mui--text-title ">{{i.participante.nome}} </span> 
+					<span class="mui-col-md-3 mui--text-title ">
+						<img src="/jbolao/resources/static/img/user_xxx.jpg" height="35"/> &nbsp; {{i.participante.nome}}
+					</span>  
 <!-- 					<span class="mui-col-md-1 mui--text-caption mui--text-center mui--text-dark">{{ i.id }}</span>  -->
 					<span class="mui-col-md-1 mui--text-headline mui--text-center"><b>{{ i.pontos }}</b></span> 
 					<span class="mui-col-md-1 mui--text-subhead mui--text-center">{{ irCtrl.countJogos }}</span> 
