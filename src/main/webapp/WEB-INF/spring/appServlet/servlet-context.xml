@@ -26,6 +26,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="br.com.jbolao.jbolao.controllers" />
+	<context:component-scan base-package="br.com.jbolao.jbolao.schedules" />
 	<context:component-scan base-package="br.com.jbolao.jbolao.mail" />
 	<context:component-scan base-package="br.com.jbolao.jbolao.services" />
 	<context:component-scan base-package="br.com.jbolao.jbolao.repositories" />

@@ -18,7 +18,7 @@ public interface ApostaRepository extends CrudRepository<Aposta, Long> {
 
 	List<Aposta> findByInscricaoCampeonatoInscricoesCampeonatoJogosAndInscricaoAtivo(Jogo jogo, boolean ativo);
 
-	List<Aposta> findByJogoAndInscricaoAtivo(Jogo jogo, boolean ativo);
+	List<Aposta> findByJogoAndInscricaoAtivoOrderByPontosDesc(Jogo jogo, boolean ativo);
 
 	List<Aposta> findByInscricaoAndColocacaoAndInscricaoAtivo(Inscricao inscricao, int colocacao, boolean ativo);
 

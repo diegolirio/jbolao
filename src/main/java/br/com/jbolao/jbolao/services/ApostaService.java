@@ -46,7 +46,7 @@ public class ApostaService {
 	}
 
 	public List<Aposta> findByJogo(Jogo jogo) {
-		return this.apostaRepository.findByJogoAndInscricaoAtivo(jogo, true);
+		return this.apostaRepository.findByJogoAndInscricaoAtivoOrderByPontosDesc(jogo, true);
 	}
 
 	public List<Aposta> findByInscricaoAndColocacao(Inscricao inscricao, int colocacao) {
