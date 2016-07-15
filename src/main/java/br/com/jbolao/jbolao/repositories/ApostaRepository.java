@@ -39,6 +39,8 @@ public interface ApostaRepository extends CrudRepository<Aposta, Long> {
 	List<Aposta> findByJogoCampeonato(Campeonato campeonato);
 
 	List<Aposta> findByInscricaoCampeonato(Campeonato campeonato);
+
+	List<Aposta> findByJogoRodadaInAndJogoCampeonatoIdOrderByInscricaoId(List<String> rodadas, Long campeonatoId);
 	
 
 }

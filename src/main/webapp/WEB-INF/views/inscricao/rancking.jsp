@@ -4,6 +4,7 @@
 	
 	<div ng-show="irCtrl.filter == 'CLEAR' || !irCtrl.filter">
 			
+			
 			  <h1>
 			  	{{irCtrl.campeonato.nome}} 
 			  	<small class="mui--text-subhead">( {{irCtrl.campeonato.descricao}} )</small>
@@ -77,19 +78,20 @@
 	
 	<div ng-show="irCtrl.filter == 'FILTER'">
 		  <div class="mui-panel mui-col-md-12 ">
-			 <button class="mui-btn" ng-click="irCtrl.setFilter('CLEAR')">Voltar</button> 
+		  	 <button class="mui-btn" ng-click="irCtrl.setFilter('CLEAR')">Voltar</button> 
 			 <a ng-click="irCtrl.filter('CLEAR')" class="mui-btn mui-btn--small">Limpar Filtro </a>
 		  </div>	
-		  
+		   
 		  <div class="mui-panel mui-col-md-12 ">
-			  <div class="mui-textfield mui-textfield--float-label mui-col-md-12 " >
-			  	<button class="mui-btn" ng-repeat="rodada in self.rodadas">{{rodada}}</button>
-			  </div>
-			  <div class="mui-textfield mui-textfield--float-label mui-col-md-4 " >
-			    <input ng-model="irCtrl.filtro.rodada">
-			    <label>Rodada {{ self.rodadas | json }}</label> 
+			  <div class="mui-textfield mui-col-md-12 " >
+			 	<h4>Rodadas</h4>
+			    <button class="mui-btn {{ irCtrl.rodadasSelecionadas.indexOf(rodada) > -1 ? 'mui-btn--accent' : 'mui-btn--primary' }}" 
+			    		ng-repeat="rodada in irCtrl.rodadas" 
+			    		ng-click="irCtrl.selecionarRodada(rodada)">{{rodada}}</button>
 			  </div>		  	  
-			  <button class="mui-btn" ng-click="irCtrl.executaFiltro(irCtrl.filtro)">Concluir</button> 
+			  <div class="mui-textfield mui-col-md-12 mui--text-right" > 
+				  <button class="mui-btn mui-btn--danger " ng-click="irCtrl.executaFiltro(irCtrl.rodadasSelecionadas)">Concluir</button>
+			  </div> 
 		  </div>		  
 	
 	</div>

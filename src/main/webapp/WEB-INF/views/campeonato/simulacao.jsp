@@ -5,6 +5,11 @@
 	  <h1>Simulação</h1>
 	  <h3>{{siCtrl.campeonato.descricao}} - {{siCtrl.campeonato.nome}}</h3>
 	  
+	  <div class="mui--text-right">
+	  	<button type="button" class="mui-btn {{ siCtrl.zerarVoltar ? 'mui-btn--danger' : 'mui-btn--primary' }}" 
+	  			ng-click="siCtrl.zerarVoltarPontucao(!siCtrl.zerarVoltar)">{{ siCtrl.zerarVoltar ? 'Voltar Pontução' : 'Somente Pontos da Simulação'}}</button>
+	  </div>
+	  
 	  <div class="mui-row">
 		  <div class="mui-panel mui-col-md-12 mui--text-center">
 			<div class="mui-row"> 
@@ -37,11 +42,11 @@
 		<span class="mui-col-md-1 mui--text-caption mui--text-center">Col.</span> 
 		<span class="mui-col-md-2 mui--text-caption ">Participante</span> 
 		<span class="mui-col-md-1 mui--text-caption mui--text-center">Pontos</span> 
-		<span class="mui-col-md-1 mui--text-caption mui--text-center">J</span> 
-<!-- 		<span class="mui-col-md-1 mui--text-caption mui--text-center">AP8</span>  -->
-<!-- 		<span class="mui-col-md-1 mui--text-caption mui--text-center">AR5</span>  -->
-<!-- 		<span class="mui-col-md-1 mui--text-caption mui--text-center">AV3</span>  -->
-<!-- 		<span class="mui-col-md-1 mui--text-caption mui--text-center">AS1</span>  -->
+<!-- 		<span class="mui-col-md-1 mui--text-caption mui--text-center">J</span>  -->
+		<span class="mui-col-md-1 mui--text-caption mui--text-center"></span> 
+		<span class="mui-col-md-1 mui--text-caption mui--text-center"></span> 
+		<span class="mui-col-md-1 mui--text-caption mui--text-center"></span> 
+		<span class="mui-col-md-1 mui--text-caption mui--text-center"></span> 
 		<span class="mui-col-md-1 mui--text-caption mui--text-center">{{ siCtrl.jogos[siCtrl.index].timeA }}</span> 
 		<span class="mui-col-md-1 mui--text-caption mui--text-center">X</span> 
 		<span class="mui-col-md-1 mui--text-caption mui--text-center">{{ siCtrl.jogos[siCtrl.index].timeB }}</span> 
@@ -52,11 +57,11 @@
 		<span class="mui-col-md-1 mui--text-subhead mui--text-center">
 			<b>{{ i.pontos }}</b> 
 			<span class="mui--text-accent-hint">{{ '+'+(i.pontosSomados) }}</span> </span> 
-		<span class="mui-col-md-1 mui--text-subhead mui--text-center">{{ siCtrl.countJogos }}</span> 
-<!-- 		<span class="mui-col-md-1 mui--text-caption mui--text-center">{{ i.acertoPlacar }}</span>  -->
-<!-- 		<span class="mui-col-md-1 mui--text-caption mui--text-center">{{ i.acertoVencedorUmResultado }}</span>  -->
-<!-- 		<span class="mui-col-md-1 mui--text-caption mui--text-center">{{ i.acertoVencedor }}</span>  -->
-<!-- 		<span class="mui-col-md-1 mui--text-caption mui--text-center">{{ i.acertoSomenteUmResultado }}</span>  -->
+<!-- 		<span class="mui-col-md-1 mui--text-subhead mui--text-center">{{ siCtrl.countJogos }}</span>  -->
+			<span class="mui-col-md-1"></span><!--<span class="mui-col-md-1 mui--text-caption mui--text-center">{{ i.acertoPlacar }}</span>  -->
+			<span class="mui-col-md-1"></span><!--<span class="mui-col-md-1 mui--text-caption mui--text-center">{{ i.acertoVencedorUmResultado }}</span>  -->
+			<span class="mui-col-md-1"></span><!--<span class="mui-col-md-1 mui--text-caption mui--text-center">{{ i.acertoVencedor }}</span>  -->
+			<span class="mui-col-md-1"></span><!--<span class="mui-col-md-1 mui--text-caption mui--text-center">{{ i.acertoSomenteUmResultado }}</span>  -->
 		<span class="mui-col-md-1 mui--text-title mui--text-center mui--text-danger">{{ i.jogoResultadoA }}</span> 
 		<span class="mui-col-md-1 mui--text-caption mui--text-center">X</span> 
 		<span class="mui-col-md-1 mui--text-title mui--text-center mui--text-danger">{{ i.jogoResultadoB }}</span> 

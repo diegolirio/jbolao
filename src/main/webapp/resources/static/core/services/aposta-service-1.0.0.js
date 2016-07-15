@@ -16,6 +16,14 @@ app.factory('ApostaService', ['$http', function($http) {
 		return $http.get('/jbolao/api/aposta/findbycampeonatoandjogorodada/'+campeonato.id+'/'+rodada);
 	}		
 
+	var _findByCampeonatoAndJogoRodadaInOrderByInscricao = function(campeonato, rodadas) {
+		var rodadasParam = "";
+		for(var i = 0; i <= rodadas.length-1; i++) {
+			rodadasParam += rodadas[i]+";";
+		} 
+		return $http.get('/jbolao/api/aposta/findbycampeonatoandjogorodadain/'+campeonato.id+"?rodadas="+rodadasParam);
+	}		
+
 	var _findByCampeonatoAndJogoStatus = function(campeonato, status) {
 		return $http.get('/jbolao/api/aposta/findbycampeonatoandjogostatus/'+campeonato.id+'/'+status);
 	}		
@@ -32,6 +40,8 @@ app.factory('ApostaService', ['$http', function($http) {
 		
 		findByCampeonatoAndJogoRodadaOrderByInscricao : _findByCampeonatoAndJogoRodadaOrderByInscricao,
 	
+		findByCampeonatoAndJogoRodadaInOrderByInscricao : _findByCampeonatoAndJogoRodadaInOrderByInscricao,
+		
 		findByCampeonatoAndJogoStatus : _findByCampeonatoAndJogoStatus,
 		
 		findOne : _findOne,

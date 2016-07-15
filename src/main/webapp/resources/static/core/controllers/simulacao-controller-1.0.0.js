@@ -168,7 +168,7 @@ app.controller('SimulacaoCrontroller', ['$routeParams', 'CampeonatoService', 'Jo
 				
 				var ps = getPontosApostaSimulacaoPorInscricao(self.inscricoes[is]);
 				self.inscricoes[is].pontosSomados = ps;				
-				self.inscricoes[is].pontos = self.inscricoesRanckingReal[ir].pontos + self.inscricoes[is].pontosSomados;
+				self.inscricoes[is].pontos = (self.zerarVoltar ? 0 : self.inscricoesRanckingReal[ir].pontos) + self.inscricoes[is].pontosSomados;
 			}
 		}
 		self.jogos[self.index].calculado = true;
@@ -192,6 +192,16 @@ app.controller('SimulacaoCrontroller', ['$routeParams', 'CampeonatoService', 'Jo
 		if(!self.jogos[self.index].calculado) {
 			self.recalcular();
 			populaResultadoParticipanteVisual(self.jogos[self.index]);
+		}
+	}
+
+	self.zerarVoltarPontucao = function(zerarVoltar) {
+		self.zerarVoltar = zerarVoltar;
+		self.recalcular();
+		if(self.zerarVoltar) { // true = ZERA
+			
+		} else { // VOLTA
+			
 		}
 	}
 	

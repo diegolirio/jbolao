@@ -9,7 +9,6 @@ app.controller('ApostaMyEditController', ['$routeParams', '$location', 'Inscrica
 	self.init = function() {
 		InscricaoService.findByIdAndCodigoEdicaoApostas($routeParams.inscricaoId, $routeParams.codigoEdicaoApostas).then(function(resp) {
 			self.inscricao = resp.data;
-			console.log(self.inscricao);
 			return resp;
 		}).then(function(respInscricao) {
 			if(self.inscricao == null || self.inscricao.campeonato.status != 'EDICAO') {
@@ -31,6 +30,12 @@ app.controller('ApostaMyEditController', ['$routeParams', '$location', 'Inscrica
 	}
 	
 	self.saveAposta = function(aposta) {
+//		InscricaoService.findByIdAndCodigoEdicaoApostas($routeParams.inscricaoId, $routeParams.codigoEdicaoApostas).then(function(resp) {
+//			if(!self.inscricao) {
+//				alert('A alteração de Aposta não encontra-se indisponivel');
+//				return;
+//			}
+//		});
 		ApostaService.save(aposta).then(function(resp) {
 			console.log(resp.data);
 		}, function(error) {

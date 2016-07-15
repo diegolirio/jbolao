@@ -1,5 +1,6 @@
 package br.com.jbolao.jbolao.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -56,6 +57,22 @@ public class ApostaApiController {
 	public ResponseEntity<String> findByJogoCampeonatoAndJogoRodadaByInscricaoId(@PathVariable("campeonatoId") Long campeonatoId, @PathVariable("rodada") String rodada) {
 		try {
 			List<Aposta> list = this.apostaService.findByJogoRodadaAndJogoCampeonatoIdOrderByInscricaoId(rodada, campeonatoId); 
+			return new ResponseEntity<String>(new ObjectMapper().writeValueAsString(list), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		} 
+	}
+	
+	@RequestMapping(value="/findbycampeonatoandjogorodadain/{campeonatoId}", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
+	public ResponseEntity<String> findByJogoCampeonatoAndJogoRodadaInOrderByInscricaoId(@PathVariable("campeonatoId") Long campeonatoId, String rodadas) {
+		try {
+			String[] rodadasSplit = rodadas.split(";");
+			List<String> rodadasIn = new ArrayList<>();
+			for (String r : rodadasSplit) {
+				rodadasIn.add(r);
+			}
+			List<Aposta> list = this.apostaService.findByJogoRodadaInAndJogoCampeonatoIdOrderByInscricaoId(rodadasIn, campeonatoId); 
 			return new ResponseEntity<String>(new ObjectMapper().writeValueAsString(list), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

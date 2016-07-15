@@ -27,8 +27,8 @@ public interface JogoRepository extends CrudRepository<Jogo, Long> {
 
 	List<Jogo> findByCampeonatoAndStatus(Campeonato campeonato, StatusType statusType);  
 	
-	@Query(value="SELECT DISTINCT j.rodada FROM Jogo j WHERE j.campeonato = ?1")
-	List<String> findDistinctRodadaByCampeonato(Campeonato campeonato);
+	@Query(value="SELECT DISTINCT j.rodada FROM Jogo j WHERE j.campeonato = ?1 AND j.status = ?2")
+	List<String> findDistinctRodadaByCampeonatoAndStatus(Campeonato campeonato, StatusType statusType);
 
 	void deleteByCampeonato(Campeonato campeonato);
 

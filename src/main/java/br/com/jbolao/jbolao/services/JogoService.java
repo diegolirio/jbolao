@@ -145,7 +145,7 @@ public class JogoService {
 	}
 
 	public List<String> findDistinctRodadaByCampeonato(Campeonato campeonato) {
-		return this.jogoRepository.findDistinctRodadaByCampeonato(campeonato);
+		return this.jogoRepository.findDistinctRodadaByCampeonatoAndStatus(campeonato, StatusType.FINALIZADO);
 	}
 
 	public void deleteByCampeonato(Campeonato campeonato) {
