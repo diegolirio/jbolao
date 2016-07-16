@@ -102,7 +102,11 @@ public class InscricaoService {
 	}
 
 	public void deleteByCampeonato(Campeonato campeonato) {
-		this.inscricaoRepository.deleteByCampeonato(campeonato);
+		//this.inscricaoRepository.deleteByCampeonato(campeonato);
+		List<Inscricao> inscricoes = this.findByCampeonatoOrderByColocacao(campeonato);
+		for (Inscricao inscricao : inscricoes) {
+			this.inscricaoRepository.delete(inscricao);
+		}
 	}
 
 	public boolean sendEmailApostasForParticipante(Inscricao inscricao, String serverURL) {

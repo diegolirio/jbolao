@@ -55,7 +55,7 @@
 		  </a>
 		  
 		  <a class="mui-btn mui-btn--raised mui-btn--danger" ng-click="jfCtrl.finalize(jfCtrl.jogo)"
-		  		  ng-show="jfCtrl.jogo.status == 'EM_ANDAMENTO' && jfCtrl.jogo.campeonato.status == 'EM_ANDAMENTO'">
+		  		  ng-show="jfCtrl.jogo.status == 'EM_ANDAMENTO' && (jfCtrl.jogo.campeonato.status == 'EM_ANDAMENTO' || jfCtrl.jogo.campeonato.status == 'CALCULANDO')">
 		  		  	Finalizar Jogo
 		  </a>
 	

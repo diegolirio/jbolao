@@ -3,11 +3,10 @@
 <div class="mui-container" ng-controller="InscricaoRanckingController as irCtrl">
 	
 	<div ng-show="irCtrl.filter == 'CLEAR' || !irCtrl.filter">
-			
-			
+		
 			  <h1>
 			  	{{irCtrl.campeonato.nome}} 
-			  	<small class="mui--text-subhead">( {{irCtrl.campeonato.descricao}} )</small>
+			  	<small class="mui--text-subhead" title="{{irCtrl.campeonato.status}}">( {{irCtrl.campeonato.descricao}} )</small>
 			  	
 			  	<button class="mui-btn mui-btn--small mui-btn--danger" 
 			  			ng-click="irCtrl.iniciar(irCtrl.campeonato)"
@@ -15,7 +14,7 @@
 			  	
 			  	<button class="mui-btn mui-btn--small mui-btn--danger" 
 			  			ng-click="irCtrl.voltarPendente(irCtrl.campeonato)"
-			  			ng-show="usuarioLogged && irCtrl.campeonato.status == 'EM_ANDAMENTO'">Voltar para Pendente</button>			  	
+			  			ng-show="usuarioLogged && (irCtrl.campeonato.status == 'EM_ANDAMENTO' || irCtrl.campeonato.status == 'CALCULANDO')">Voltar para Pendente</button>			  	
 			  	
 			  	<button class="mui-btn mui-btn--small" 
 			  			ng-click="irCtrl.sendEmailApostasForParticipantes(irCtrl.campeonato)"

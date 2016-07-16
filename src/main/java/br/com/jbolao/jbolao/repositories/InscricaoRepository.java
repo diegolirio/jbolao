@@ -27,7 +27,7 @@ public interface InscricaoRepository extends CrudRepository<Inscricao, Long> {
 	@Query("SELECT MAX(i.colocacao) FROM Inscricao i WHERE i.campeonato = ?1")
 	Integer maxColocacaoByCampeonato(Campeonato campeonato);
 
-	void deleteByCampeonato(Campeonato campeonato);
+	//void deleteByCampeonato(Campeonato campeonato);
 
 	Inscricao findByIdAndCodigoEdicaoApostasAndAtivo(Long id, String codigoEdicaoApostas, boolean ativo); 
 	

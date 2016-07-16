@@ -103,7 +103,7 @@ public class JogoService {
 	public Jogo finalize(Jogo jogo) {
 		if(jogo.getStatus() != StatusType.EM_ANDAMENTO)
 			throw new RuntimeException("Jogo Deve estar Em Andamento para ser Finalizado");
-		if(jogo.getCampeonato().getStatus() != StatusType.EM_ANDAMENTO) 
+		if(jogo.getCampeonato().getStatus() != StatusType.EM_ANDAMENTO && jogo.getCampeonato().getStatus() != StatusType.CALCULANDO) 
 			throw new RuntimeException("Campeonato Deve estar em Em Andamento para Jogo ser Finalizado");
 		jogo.setStatus(StatusType.FINALIZADO);
 		jogo = this.save(jogo);

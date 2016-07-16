@@ -1,16 +1,12 @@
 package br.com.jbolao.jbolao.models;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Participante implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class Participante {
 
 	@Id @GeneratedValue
 	private Long id;
