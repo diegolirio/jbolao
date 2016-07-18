@@ -21,7 +21,10 @@ app.factory('CampeonatoService', ['$http', function($http) {
 	}
 	
 	var _sendEmailRancking = function(campeonato) {
-		return $http.put('/jbolao/api/campeonato/sendmailrancking/'+campeonato.id);
+		var serverURL = 'http://'+$location.host();
+		if($location.port() > 0)
+			serverURL += (':'+$location.port());		
+		return $http.put('/jbolao/api/campeonato/sendmailrancking/'+campeonato.id+'?serverURL='+serverURL);
 	}
 	
 	var _deleteCampeonato = function(campeonato) {

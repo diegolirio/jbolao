@@ -149,7 +149,11 @@ public class JogoService {
 	}
 
 	public void deleteByCampeonato(Campeonato campeonato) {
-		this.jogoRepository.deleteByCampeonato(campeonato);
+		//this.jogoRepository.deleteByCampeonato(campeonato);
+		List<Jogo> list = this.jogoRepository.findByCampeonato(campeonato);
+		for (Jogo jogo : list) {
+			this.jogoRepository.delete(jogo);
+		}
 	}
 	
 	public void delete(Jogo jogo) {

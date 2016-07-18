@@ -87,7 +87,7 @@ public class InscricaoService {
 				this.apostaService.delete(aposta);
 			}
 			
-			if(this.apostaService.countByInscricao(inscricao) <= 0) {
+			if(this.apostaService.countByInscricaoAll(inscricao) <= 0) {
 				this.inscricaoRepository.delete(inscricao);
 			}
 		} else {

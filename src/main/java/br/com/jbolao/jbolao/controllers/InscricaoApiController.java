@@ -2,8 +2,6 @@ package br.com.jbolao.jbolao.controllers;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import br.com.jbolao.jbolao.common.HttpCommon;
 import br.com.jbolao.jbolao.models.Campeonato;
 import br.com.jbolao.jbolao.models.Inscricao;
 import br.com.jbolao.jbolao.models.Participante;
@@ -127,10 +124,10 @@ public class InscricaoApiController {
 	}
 
 	@RequestMapping(value="/sendemailapostasforparticipantes/{id}", produces="application/json")
-	public ResponseEntity<String> sendEmailApostasForParticipantes(@PathVariable("id") Long id, HttpServletRequest request) {
+	public ResponseEntity<String> sendEmailApostasForParticipantes(@PathVariable("id") Long id, String serverURL) {
 		try {
 			Campeonato campeonato = this.campeonatoService.findOne(id);
-			String serverURL = HttpCommon.getURLServer(request);
+			//String serverURL = HttpCommon.getURLServer(request);
 			this.inscricaoService.sendEmailApostasForParticipantes(campeonato, serverURL);
 			return new ResponseEntity<String>(HttpStatus.OK);
 		} catch (Exception e) {

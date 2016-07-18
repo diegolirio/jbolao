@@ -18,11 +18,17 @@ public class ApostaService {
 
 	@Autowired
 	private ApostaRepository apostaRepository;
+	@Autowired
+	private InscricaoService inscricaoService;
 
 	public List<Aposta> findByInscricao(Inscricao inscricao) {
 		return this.apostaRepository.findByInscricaoAndInscricaoAtivo(inscricao, true);
 	}
 
+	public List<Aposta> findByInscricaoAll(Inscricao inscricao) {
+		return this.apostaRepository.findByInscricao(inscricao);
+	}	
+	
 	public VencedorType getVencedor(Aposta aposta) {
 		if(aposta.getResultadoA() > aposta.getResultadoB()) 
 			return VencedorType.A;
@@ -61,16 +67,26 @@ public class ApostaService {
 		return this.apostaRepository.findByJogoRodadaAndJogoCampeonatoIdAndInscricaoAtivoOrderByInscricaoId(rodada, campeonatoId, true);
 	}
 
-	public int countByInscricao(Inscricao inscricao) {
-		return this.apostaRepository.countByInscricao(inscricao);
+	public int countByInscricaoAll(Inscricao inscricao) {
+		//return this.apostaRepository.countByInscricao(inscricao);
+		List<Aposta> list = this.findByInscricaoAll(inscricao);
+		return list == null ? 0 : list.size();
 	}
 
 	public void deleteByJogoCampeonato(Campeonato campeonato) {
-		this.apostaRepository.deleteByJogoCampeonato(campeonato);
+		List<Aposta> list = this.findByJogoCampeonato(campeonato);
+		for (Aposta aposta : list) {
+			this.apostaRepository.delete(aposta);
+		}
 	}
 
-	public void deleteByInscricaoId(Long id) {
-		this.apostaRepository.deleteByInscricaoId(id);
+	public void deleteByInscricaoId(Long inscricaoId) {
+		//TODO: this.apostaRepository.deleteByInscricaoId(id);
+		Inscricao inscricao = this.inscricaoService.findOne(inscricaoId);
+		List<Aposta> list = this.findByInscricaoAll(inscricao);
+		for (Aposta aposta : list) {
+			this.delete(aposta);
+		}
 	}
 
 	public void delete(Aposta aposta) {

@@ -1,4 +1,4 @@
-app.factory('InscricaoService', ['$http', function($http) {
+app.factory('InscricaoService', ['$http', '$location', function($http, $location) {
 	
 	var _findByCampeonato = function(campeonato) {
 		return $http.get('/jbolao/api/inscricao/findbycampeonato/'+campeonato.id);//, campeonato);
@@ -21,7 +21,10 @@ app.factory('InscricaoService', ['$http', function($http) {
 	}	
 	
 	var _sendEmailApostasForParticipantes = function(campeonato) {
-		return $http.post('/jbolao/api/inscricao/sendemailapostasforparticipantes/'+campeonato.id);
+		var serverURL = 'http://'+$location.host();
+		if($location.port() > 0)
+			serverURL += (':'+$location.port());
+		return $http.post('/jbolao/api/inscricao/sendemailapostasforparticipantes/'+campeonato.id+'?serverURL='+serverURL);
 	}
 	
 	var _findByIdAndCodigoEdicaoApostas = function(id, codigoEdicaoApostas) {

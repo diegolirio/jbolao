@@ -2,8 +2,6 @@ package br.com.jbolao.jbolao.controllers;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.jbolao.jbolao.common.HttpCommon;
 import br.com.jbolao.jbolao.models.Campeonato;
 import br.com.jbolao.jbolao.services.CampeonatoService;
 
@@ -99,8 +96,8 @@ public class CampeonatoApiController {
 	}
 	
 	@RequestMapping(value="/sendmailrancking/{id}", produces="application/json", method=RequestMethod.PUT)
-	public ResponseEntity<String> sendMailRancking(@PathVariable("id") Long id, HttpServletRequest request) {
-		String serverURL = HttpCommon.getURLServer(request);
+	public ResponseEntity<String> sendMailRancking(@PathVariable("id") Long id, String serverURL) {
+		//String serverURL = HttpCommon.getURLServer(request);
 		this.campeonatoService.sendMailRancking(id, serverURL);
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
