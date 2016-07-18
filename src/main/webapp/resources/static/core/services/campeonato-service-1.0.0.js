@@ -1,4 +1,4 @@
-app.factory('CampeonatoService', ['$http', function($http) {
+app.factory('CampeonatoService', ['$http', '$location', function($http, $location) {
 	
 	var _findAll = function() {
 		return $http.get('/jbolao/api/campeonato/findall');
@@ -22,10 +22,10 @@ app.factory('CampeonatoService', ['$http', function($http) {
 	
 	var _sendEmailRancking = function(campeonato) {
 		var serverURL = 'http://'+$location.host();
-		if($location.port() > 0)
-			serverURL += (':'+$location.port());		
+		if($location.port() > 0) 
+			serverURL += (':'+$location.port());
 		return $http.put('/jbolao/api/campeonato/sendmailrancking/'+campeonato.id+'?serverURL='+serverURL);
-	}
+	} 
 	
 	var _deleteCampeonato = function(campeonato) {
 		return $http.delete('/jbolao/api/campeonato/delete/'+campeonato.id);
