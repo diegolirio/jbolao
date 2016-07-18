@@ -3,7 +3,7 @@ var app = angular.module('app', ['ngRoute', 'angucomplete-alt']);
 
 var SERVER_APP = '/jbolao';
 
-app.config(['$routeProvider', '$httpProvider',  
+app.config(['$routeProvider', '$httpProvider',   
             function($routeProvider, $httpProvider) {
 	  
 	$routeProvider
@@ -34,6 +34,35 @@ app.config(['$routeProvider', '$httpProvider',
 		.when('/participante/:id/campeonato/:campeonatoId', { templateUrl: SERVER_APP + '/participante/form'})
 		
 		;
+	
+	
+//	/* ******************** Interceptor ******************** */
+	$httpProvider.responseInterceptors.push('HttpInterceptor');
+//    /* ******************** Loading Gif ******************** */ 
+    var spinnerFunction = function (data) {
+            $('#spinner').show();
+    		//$rootScope.spinnerVisibled = true;
+            return data; 
+    };      
+    $httpProvider.defaults.transformRequest.push(spinnerFunction); 	
 
 }]);  
 
+app.factory('HttpInterceptor',['$q', 
+                              function($q) { 
+	/********************************************************************************************
+     * Tratamento do retorno do response(ajax)...
+	 ********************************************************************************************/	  	
+	return function (promise) { 
+		return promise.then(function (resp) {
+			$('#spinner').hide();
+			//$rootScope.spinnerVisibled = true;
+			return resp;
+		}, function (errorResp) {
+			$('#spinner').hide();
+			//$rootScope.spinnerVisibled = true;
+			return $q.reject(errorResp);
+		});
+	};
+
+}]);

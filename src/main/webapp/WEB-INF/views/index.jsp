@@ -5,8 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- load Angular -->
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js"></script>
+    
+	<!-- ########################## AngularJS ########################################################################### -->
+<!--     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script> -->
+<!--     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js"></script> -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular-route.js"></script>    
+    
     <link href="${pageContext.request.contextPath}/resources/static/mui-0.6.5/css/mui.min.css" rel="stylesheet" type="text/css" />
     <script src="${pageContext.request.contextPath}/resources/static/mui-0.6.5/js/mui.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/static/mui-0.6.5/angular/mui-angular.js"></script>
@@ -244,8 +249,15 @@
 		});
      	 
     </script>
+    <!-- spinner loading -->
+    <link href="${pageContext.request.contextPath}/resources/static/css/spinner.css" rel="stylesheet" type="text/css" />    
   </head>
   <body ng-controller="UsuarioSessionController as uSessionCtrl">
+  
+  		<div id="spinner" class="spinner" style="display:none;"> 
+	         <img id="img-spinner" src="${pageContext.request.contextPath}/resources/static/img/211.gif" alt="Aguarde..."/> <br/>
+	    </div>  	
+  
 	    <div id="sidedrawer" class="mui--no-user-select">
 	      <div id="sidedrawer-brand" class="mui--appbar-line-height">
 	      	<a href="${pageContext.request.contextPath}">
