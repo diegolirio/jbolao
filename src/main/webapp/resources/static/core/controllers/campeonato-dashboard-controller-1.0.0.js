@@ -6,13 +6,11 @@ app.controller('CampeonatoDashboardCrontroller', ['$route', '$location', 'Campeo
 
 	var self = this;
 	
+	self.TODOS = 0;
+	self.MEUS = 1;
+	
 	self.init = function() {
-		
-		CampeonatoService.findAll().then(function(resp) {
-			self.campeonatos = resp.data;  
-		}, function(error) {
-			alert(JSON.stringify(error));
-		});
+		self.findAll();
 	}
 	
 	self.enterCampeonato = function(campeonato) {
@@ -23,6 +21,31 @@ app.controller('CampeonatoDashboardCrontroller', ['$route', '$location', 'Campeo
 		}, function(error) {
 			alert(JSON.stringify(error));
 		});
+	}
+
+	self.findAll = function() {
+		CampeonatoService.findAll().then(function(resp) {
+			self.campeonatos = resp.data;  
+			self.showCampeonatos = self.TODOS;
+		}, function(error) {
+			alert(JSON.stringify(error));
+		});
+	}
+	
+	self.meusCampeonatos = function(usuario) {
+		CampeonatoService.findByPresidente(usuario).then(function(resp) {
+			self.campeonatos = resp.data;
+			self.showCampeonatos = self.MEUS;
+		}, function(error) {
+			alert(error);
+		});
+	}
+	
+	self.btnShowCampeonatos = function(usuario) {
+		if(self.showCampeonatos == self.TODOS)
+			self.meusCampeonatos(usuario);
+		else
+			self.findAll();
 	}
 	
 	self.init();

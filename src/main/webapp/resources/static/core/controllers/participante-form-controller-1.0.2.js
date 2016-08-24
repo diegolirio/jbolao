@@ -14,7 +14,6 @@ app.controller('ParticipanteFormController', ['$routeParams', '$location', '$win
 			}).then(function(participanteResp) {
 				InscricaoService.findByParticipante(self.participante).then(function(resp) {
 					self.inscricaoList = resp.data;
-					console.log(self.inscricaoList);
 					self.jaInscrito = self.inscricaoList != null && self.inscricaoList != undefined && self.inscricaoList.length > 0;
 				}, function(error) {
 					alert(JSON.stringify(error));
@@ -26,6 +25,7 @@ app.controller('ParticipanteFormController', ['$routeParams', '$location', '$win
 		
 		CampeonatoService.findOne($routeParams.campeonatoId).then(function(resp) {
 			self.campeonato = resp.data;
+			self.campeonato.dataCadastro = null;
 		}, function(error) {
 			alert(JSON.stringify(error));
 		});

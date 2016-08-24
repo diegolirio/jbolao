@@ -16,6 +16,7 @@ app.controller('CampeonatoFormController', ['$location', '$routeParams', 'Campeo
 	}
 	
 	self.save = function(campeonato) {
+		if(campeonato.dataCadastro) campeonato.dataCadastro = null;
 		CampeonatoService.save(campeonato).then(function(resp) {
 			self.campeonato = resp.data;
 			alert("Gravado com sucesso!");

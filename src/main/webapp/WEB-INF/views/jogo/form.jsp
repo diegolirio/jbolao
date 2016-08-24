@@ -40,9 +40,12 @@
 		  		  ng-disabled="formJogo.timeA.$invalid || formJogo.timeB.$invalid">Salvar</button>
 		  
 		  <button type="button" class="mui-btn mui-btn--raised mui-btn--danger" 
-		  		  ng-click="jfCtrl.deleteJogo(jfCtrl.jogo)" ng-show="jfCtrl.jogo.id > 0">Excluir</button>
+		  		  ng-click="jfCtrl.deleteJogo(jfCtrl.jogo)" 
+		  		  ng-show="(usuarioLogged.id == 1 || usuarioLogged.id == jfCtrl.jogo.campeonato.presidente.id) && jfCtrl.jogo.id > 0">
+		  		   Excluir
+		  </button>
 		  
-		  <a ng-href="#/apostas_por_jogo/{{jfCtrl.jogo.id}}" class="mui-btn mui-btn--raised">Voltar</a>
+		  <a ng-href="{{jfCtrl.previousPage}}" class="mui-btn mui-btn--raised">Voltar</a>
 		  
 		  <a class="mui-btn mui-btn--raised mui-btn--danger" ng-click="jfCtrl.start(jfCtrl.jogo)" 
 		  		ng-show="jfCtrl.jogo.status == 'EDICAO' && jfCtrl.jogo.campeonato.status == 'EM_ANDAMENTO'">

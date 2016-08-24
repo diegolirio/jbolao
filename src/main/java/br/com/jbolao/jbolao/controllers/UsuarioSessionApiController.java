@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,13 +22,13 @@ import br.com.jbolao.jbolao.services.UsuarioService;
 @RequestMapping(value="/api/usuariosession")
 public class UsuarioSessionApiController {
 
-	private static final String CAMPEONATO_SESSION = "campeonatoSession";
-	private static final String USUARIO_LOGGED_SESSION = "usuarioLogged";
+	public static final String CAMPEONATO_SESSION = "campeonatoSession";
+	public static final String USUARIO_LOGGED_SESSION = "usuarioLogged";
 	
 	@Autowired
 	private UsuarioService usuarioService;
 
-	@RequestMapping(value="get/usuario", method=RequestMethod.GET, produces="application/json")
+	@RequestMapping(value="/get/usuario", method=RequestMethod.GET, produces="application/json")
 	public ResponseEntity<String> setUsuario(HttpSession session) {
 		try {
 			Usuario usuario = (Usuario) session.getAttribute(USUARIO_LOGGED_SESSION);
@@ -45,11 +46,22 @@ public class UsuarioSessionApiController {
 	}
 	
 	
-	@RequestMapping(value="/set/campeonato", method=RequestMethod.POST, consumes="application/json", produces="application/json")
+	@RequestMapping(value="/set/campeonato", method=RequestMethod.POST, consumes="application/json; charset=UTF-8", produces="application/json; charset=UTF-8")
 	public ResponseEntity<String> setCampeonato(@RequestBody Campeonato campeonato, HttpSession session) {
 		try {
 			session.setAttribute(CAMPEONATO_SESSION, campeonato);
 			return new ResponseEntity<String>(new ObjectMapper().writeValueAsString(campeonato), HttpStatus.OK);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@RequestMapping(value="/set/campeonato/{campeonatoId}", method=RequestMethod.POST, produces="application/json; charset=UTF-8")
+	public ResponseEntity<String> setCampeonato(@PathVariable("campeonatoId") Long campeonatoId, HttpSession session) {
+		try {
+			session.setAttribute(CAMPEONATO_SESSION, new Campeonato(campeonatoId));
+			return new ResponseEntity<String>(new ObjectMapper().writeValueAsString(new Campeonato(campeonatoId)), HttpStatus.OK);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

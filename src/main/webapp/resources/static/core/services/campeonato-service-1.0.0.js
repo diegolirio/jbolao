@@ -27,6 +27,10 @@ app.factory('CampeonatoService', ['$http', '$location', function($http, $locatio
 		return $http.put('/jbolao/api/campeonato/sendmailrancking/'+campeonato.id+'?serverURL='+serverURL);
 	} 
 	
+	var _findByPresidente = function(usuario) {
+		return $http.get('/jbolao/api/campeonato/findbypresidente/'+usuario.id);
+	}
+	
 	var _deleteCampeonato = function(campeonato) {
 		return $http.delete('/jbolao/api/campeonato/delete/'+campeonato.id);
 	}
@@ -44,6 +48,8 @@ app.factory('CampeonatoService', ['$http', '$location', function($http, $locatio
 		voltarPendente : _backToModeEdit,
 	
 		sendEmailRancking : _sendEmailRancking,
+	
+		findByPresidente : _findByPresidente,
 		
 		deleteCampeonato : _deleteCampeonato
 		

@@ -9,8 +9,10 @@ app.controller('UsuarioSessionController', ['$scope', '$location', 'UsuarioSessi
 	self.init = function() {
 		
 		UsuarioSessionService.getUsuarioSession().then(function(resp) {
-			self.usuarioLogged = resp.data;
-			$scope.usuarioLogged = self.usuarioLogged; 
+			if(resp.data != null && resp.data != undefined && resp.data != "null" && resp.data != "" && resp.data) {
+				self.usuarioLogged = resp.data;
+				$scope.usuarioLogged = self.usuarioLogged;
+			}
 		}, function(error) {
 			alert(JSON.stringify(error));
 		});

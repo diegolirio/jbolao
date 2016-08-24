@@ -9,17 +9,17 @@
 	  <hr/>	
 	  
 	  <div class="mui-row">
-		  <div class="mui-col-md-8">
+		  <div class="mui-col-md-7">
 			  <h3>
 			  	Jogos
-			  	<a ng-href="#/jogo/0/campeonato/{{jCtrl.campeonato.id}}"
-			  	   ng-show="usuarioLogged" 
+			  	<a ng-href="#/jogo/0/campeonato/{{jCtrl.campeonato.id}}?next=/jogos/{{jCtrl.campeonato.id}}" 
+			  	   ng-show="(usuarioLogged.id == 1 || usuarioLogged.id == jCtrl.campeonato.presidente.id)" 
 			  	   class="mui-btn mui-btn--small mui-btn--primary mui-btn--fab">+</a>
 			  </h3>
-		  </div>
-		  <div class="mui-col-md-4 mui--text-right">
-	  	  	  <a href="#/classificacao/{{jCtrl.campeonato.id}}" class="mui-btn mui-btn--small">Classificação</a>
-		  </div>		
+		  </div> 
+		  <div class="mui-col-md-5 mui--text-right">
+		  	  <a href="#/classificacao/{{jCtrl.campeonato.id}}" class="mui-btn mui-btn--small">Classificação</a>
+		  </div>				  
 	  </div>	
 	  
 	  <div class="mui-row">

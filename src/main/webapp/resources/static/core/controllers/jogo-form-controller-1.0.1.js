@@ -4,15 +4,16 @@ app.controller('JogoFormController', ['$routeParams', '$location', '$window', 'J
 	var self = this;
 
 	self.init = function() {
+		self.clearJogo();
 		if($routeParams.id > 0) {
 			JogoService.findOne($routeParams.id).then(function(resp) {
 				self.jogo = resp.data;
 			}, function(error) {
 				alert(JSON.stringify(error));
 			});
-		} else {
-			self.clearJogo();
-		}
+		} 
+		self.previousPage = '#'+ ($location.search().next ? $location.search().next : '/jogos/'+self.jogo.campeonato.id);
+		self.nextPage = ($location.search().next ? $location.search().next : '/jogos/'+self.jogo.campeonato.id);
 	}
 	
 	self.clearJogo = function() {
@@ -36,9 +37,9 @@ app.controller('JogoFormController', ['$routeParams', '$location', '$window', 'J
 			alert(JSON.stringify(error.data));
 		});
 	}	
-	 
+	  
 	self.save = function(jogo) {
-		_save(jogo, '/apostas_por_jogo/');
+		_save(jogo, jogo.id > 0 ? '/apostas_por_jogo/' : self.nextPage+'?' );
 	}
 	
 	self.saveAndAddOther = function(jogo) {

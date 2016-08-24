@@ -13,5 +13,7 @@ import br.com.jbolao.jbolao.models.StatusType;
 public interface CampeonatoRepository extends CrudRepository<Campeonato, Long> {
 
 	List<Campeonato> findByStatusAndInscricoesApostasCalculadoAndInscricoesApostasJogoStatusIn(StatusType emAndamento, boolean apostasCalculadas, Collection<StatusType> statusListJogo);
+
+	List<Campeonato> findByPresidenteId(Long usuarioPresidenteId);
 	
 }

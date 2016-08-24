@@ -9,7 +9,8 @@ app.factory('UsuarioSessionService', ['$http', function($http) {
 	}
 	
 	var _setCampeonatoSession = function(campeonato) {
-		return $http.post('/jbolao/api/usuariosession/set/campeonato', campeonato);
+		//return $http.post('/jbolao/api/usuariosession/set/campeonato', campeonato);
+		return $http.post('/jbolao/api/usuariosession/set/campeonato/'+campeonato.id);
 	}
 	
 	var _login = function(usuario) {
@@ -18,6 +19,18 @@ app.factory('UsuarioSessionService', ['$http', function($http) {
 	
 	var _logout = function() {
 		return $http.get('/jbolao/api/usuariosession/logout');
+	}
+	
+	var _isUsuarioAdmin = function(usuario) {
+		if(usuario.id == 1) 
+			return true;
+		return false;
+	}
+	
+	var _isUsuarioAdminOrUsuarioPresidente = function(usuario, campeonato) {
+		if(usuario.id == 1 || usuario.id == campeonato.presidente.id) 
+			return true;
+		return false;
 	}
 	
 	return {

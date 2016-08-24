@@ -39,7 +39,7 @@
 			<span class="mui-col-md-3 mui--text-headline">
 				<!-- Nao logado e Em Edicao -->
 				<span ng-show="!usuarioLogged || a.jogo.status != 'EDICAO'">
-					{{a.resultadoA}} X {{a.resultadoB}}
+					{{alCtrl.inscricao.campeonato.status != 'EDICAO' ?  a.resultadoA : ''}} x {{alCtrl.inscricao.campeonato.status != 'EDICAO' ?  a.resultadoB : ''}}
 				</span>
 				<!-- Logado e Em Edicao -->
 				<span ng-show="usuarioLogged && a.jogo.status == 'EDICAO'">

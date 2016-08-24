@@ -123,7 +123,7 @@ public class InscricaoApiController {
 		} 
 	}
 
-	@RequestMapping(value="/sendemailapostasforparticipantes/{id}", produces="application/json")
+	@RequestMapping(value="/sendemailapostasforparticipantes/{id}", produces="application/json; charset=UTF-8")
 	public ResponseEntity<String> sendEmailApostasForParticipantes(@PathVariable("id") Long id, String serverURL) {
 		try {
 			Campeonato campeonato = this.campeonatoService.findOne(id);

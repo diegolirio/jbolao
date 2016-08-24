@@ -280,4 +280,8 @@ public class CampeonatoService {
 		return true;
 	}
 
+	public List<Campeonato> findByPresidenteId(Long usuarioPresidenteId) {
+		return this.campeonatoRepository.findByPresidenteId(usuarioPresidenteId);
+	}
+
 }

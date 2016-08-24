@@ -1,6 +1,7 @@
 package br.com.jbolao.jbolao.models;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,8 +10,11 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -38,7 +42,7 @@ public class Campeonato implements Serializable {
 	@Column(columnDefinition="VARCHAR(20) NOT NULL default 'EDICAO'")
 	private StatusType status = StatusType.EDICAO;
 	
-	@org.codehaus.jackson.annotate.JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy="campeonato")
 	private List<Inscricao> inscricoes;
 	
@@ -46,7 +50,16 @@ public class Campeonato implements Serializable {
 	@OneToMany(mappedBy="campeonato")
 	private List<Jogo> jogos;
 	
-	private boolean alteraApostaAntesJogo = false;
+	private boolean alteraApostaAntesJogo = false; 
+	
+	@JsonIgnore
+	@Temporal(TemporalType.DATE)
+	//@JsonSerialize(using = CalendarToStringSerializerHelpser.class)
+	//@JsonDeserialize(using = StringToCalendarDeserializerHelper.class) 
+	private Calendar dataCadastro = Calendar.getInstance();	
+	
+	@ManyToOne
+	private Usuario presidente;
 	
 	public Campeonato() {}
 	
@@ -110,6 +123,22 @@ public class Campeonato implements Serializable {
 		this.alteraApostaAntesJogo = alteraApostaAntesJogo;
 	}
 	
+	public Usuario getPresidente() {
+		return presidente;
+	}
+
+	public void setPresidente(Usuario presidente) {
+		this.presidente = presidente;
+	}
+
+	public Calendar getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(Calendar dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
 	@Override
 	public String toString() {
 		return "Campeonato [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", status=" + status + "]";
