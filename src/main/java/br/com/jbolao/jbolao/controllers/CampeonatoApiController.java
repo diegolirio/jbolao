@@ -2,6 +2,7 @@ package br.com.jbolao.jbolao.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -26,8 +27,12 @@ public class CampeonatoApiController {
 	private CampeonatoService campeonatoService;
 
 	@RequestMapping(value="/findall", produces="application/json; charset=UTF-8")
-	public ResponseEntity<String> findAll() {
+	public ResponseEntity<String> findAll(HttpServletResponse response) {
 		try {
+			response.setHeader("Access-Control-Allow-Origin", "*");
+			response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+			response.setHeader("Access-Control-Max-Age", "3600");
+			response.setHeader("Access-Control-Allow-Headers", "x-requested-with");				
 			List<Campeonato> list = this.campeonatoService.findAll();
 			return new ResponseEntity<String>(new ObjectMapper().writeValueAsString(list ), HttpStatus.OK);
 		} catch (Exception e) {
