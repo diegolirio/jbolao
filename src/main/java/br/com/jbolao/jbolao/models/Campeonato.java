@@ -50,6 +50,7 @@ public class Campeonato implements Serializable {
 	@OneToMany(mappedBy="campeonato")
 	private List<Jogo> jogos;
 	
+	@Column(name="altera_aposta_antes_jogo")
 	private boolean alteraApostaAntesJogo = false; 
 	
 	@JsonIgnore
