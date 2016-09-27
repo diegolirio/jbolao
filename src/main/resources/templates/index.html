@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="utf-8"/>
+    <title>Bolão</title>
+	<link rel="stylesheet" href="static/mdl/material.min.css" th:href="@{/mdl/material.min.css}"/>
+	<style>
+		body { background-color: #d9d9d9; }	
+	</style>
+</head>
+<body>
+
+	<!-- Always shows a header, even in smaller screens. -->
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+	  <header class="mdl-layout__header">
+		<div class="mdl-layout__header-row">
+		  <!-- Title -->
+		  <span class="mdl-layout-title">Bolão</span>
+		  <!-- Add spacer, to align navigation to the right -->
+		  <div class="mdl-layout-spacer"></div>
+		  <!-- Navigation. We hide it in small screens. -->
+		  <nav class="mdl-navigation mdl-layout--large-screen-only">
+			<a class="mdl-navigation__link" href="">Link</a>
+			<a class="mdl-navigation__link" href="">Link</a>
+			<a class="mdl-navigation__link" href="">Link</a>
+			<a class="mdl-navigation__link" href="">Link</a>
+		  </nav>
+		</div>
+	  </header>
+	  <div class="mdl-layout__drawer">
+		<span class="mdl-layout-title">Bolão</span>
+		<nav class="mdl-navigation">
+		  <a class="mdl-navigation__link" href="">Link</a>
+		  <a class="mdl-navigation__link" href="">Link</a>
+		  <a class="mdl-navigation__link" href="">Link</a>
+		  <a class="mdl-navigation__link" href="">Link</a>
+		</nav>
+	  </div>
+	  <main class="mdl-layout__content">
+		<div class="page-content">
+			<!-- Your content goes here -->
+		</div>
+	  </main>
+	</div>
+	
+	<br/><br/><br/><br/>
+	 
+	<div class="container"> 
+		
+		<div ng-view="ng-view"></div>			
+
+	</div>
+	
+	<script src="static/mdl/material.min.js" th:src="@{/mdl/material.min.js}"></script>
+	<link rel="stylesheet" href="static/mdl/fontsgoogle-icons-material-icons.css" th:href="@{/mdl/fontsgoogle-icons-material-icons.css}"/>
+	
+	<script src="static/angularjs/1.2.28/angular.min.js"   th:src="@{/angularjs/1.2.28/angular.min.js}"></script>
+	<script src="static/angularjs/1.2.28/angular-route.js" th:src="@{/angularjs/1.2.28/angular-route.js}"></script>
+	
+	<script src="static/core/app.js" th:src="@{/core/app.js}"></script>
+	
+	
+</body>
+</html>
